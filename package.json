@@ -1,0 +1,24 @@
+{
+  "name": "ibm-edu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VaishnaviNandakumar/ibm-hack.git"
+  },
+  "author": "Vaishnavi Nandakumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VaishnaviNandakumar/ibm-hack/issues"
+  },
+  "homepage": "https://github.com/VaishnaviNandakumar/ibm-hack#readme",
+  "dependencies": {
+    "log4js": "^6.3.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
