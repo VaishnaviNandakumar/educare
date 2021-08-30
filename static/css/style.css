@@ -1,0 +1,40 @@
+.form-group{
+    
+    font-family: Montserrat;
+}
+
+.btn{
+color: white;
+background: #0994FF;
+border-color: #0994FF;
+border-radius: 20px;
+
+}
+
+a:hover {
+    color:  #0994FF;
+  }
+
+.submitlink{
+    color:  #0994FF;
+}
+
+.inputfield{
+    border-radius: 10px;
+}
+
+.card{
+    border: 30px solid  #0994FF;
+    border-radius: 20px;
+}
+
+.content{
+    padding: 20px;
+    border: 5px solid  #0994FF;
+    border-radius: 20px;
+
+}
+
+.text-center{
+    padding:40px;
+}
