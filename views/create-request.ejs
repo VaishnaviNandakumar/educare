@@ -1,0 +1,36 @@
+<div class="row mt-5">
+   <div class="col-md-6 m-auto">
+      <div class="card card-body">
+         <h1 class="text-center mb-3">
+            <i class="fas fa-user-plus"></i> Create Request
+            <br>
+         </h1>
+         <% include ./partials/messages %>
+         <form action="/org-dashboard/create-request" method="POST">
+            <div class="form-group" >
+               <input 
+                  type="title"
+                  id="title"
+                  name="title"
+                  class="form-control"
+                  placeholder="Enter Title"
+                  value="<%= typeof title != 'undefined' ? title : '' %>"
+                  />
+            </div>
+            <div class="form-group">
+               <input
+                  type="desc"
+                  id="desc"
+                  name="desc"
+                  class="form-control"
+                  placeholder="Enter Description"
+                  value="<%= typeof Description != 'undefined' ? Description : '' %>"
+                  />
+            </div>
+            <button type="submit" class="btn btn-block">
+            Register
+            </button>
+         </form>
+      </div>
+   </div>
+</div>
