@@ -54,19 +54,22 @@ router.post('/register',(req,res) => {
                 password2
             });
     }
-    else{
-        const newUser = new User({
+           else {
+            var role = "user";
+            const newUser = new User({
             name,
             email,
-            password
+            password,
+            role
         });
+               
         //Hash Password
         bcrypt.genSalt(10, (err,salt)=>
             bcrypt.hash(newUser.password, salt, (err,hash)=> {
                 if(err) throw err;
-
                 //Set password to hashed
-                newUser.password =hash ;
+                newUser.password = hash;
+                
                 //Save user
                 newUser.save()
                     .then(user=> {
@@ -79,15 +82,15 @@ router.post('/register',(req,res) => {
 });
 }
 });
+
+
 //Login Handle
 router.post('/login', (req,res, next) =>{
-    passport.authenticate('local', {
+    passport.authenticate('user-local', {
         successRedirect:'/dashboard',
         failureRedirect:'/user/login',
         failureFlash: true
-
     })(req, res, next);
-
 });
 
 //Logout Handle

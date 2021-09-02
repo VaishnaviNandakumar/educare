@@ -17,13 +17,13 @@ var userSchema = new mongoose.Schema({
   location: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     index: true,
   },
   funding: {
     type: Number,
     required: true,
-    unique: true,
+    unique: false,
     index: true,
   },
   date: {
@@ -33,6 +33,11 @@ var userSchema = new mongoose.Schema({
     index: true,
   },
   password: {
+    type: String,
+    required: true,
+    index: true,
+  },
+  role: {
     type: String,
     required: true,
     index: true,

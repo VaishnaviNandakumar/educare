@@ -7,7 +7,7 @@ const passport = require("passport");
 const Organization = require("../models/Organization");
 
 //Login Page
-router.get("/login", (req, res) => res.render("login"));
+router.get("/login", (req, res) => res.render("orglogin"));
 
 //Register Page
 router.get("/register", (req, res) => res.render("orgregister"));
@@ -54,18 +54,20 @@ router.post("/register", (req, res) => {
           password2,
         });
       } else {
+        var role = "org";
         const newUser = new Organization({
           name,
           email,
           location,
           funding,
           password,
+          role
         });
+      
         //Hash Password
         bcrypt.genSalt(10, (err, salt) =>
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
-
             //Set password to hashed
             newUser.password = hash;
             //Save user
@@ -76,7 +78,7 @@ router.post("/register", (req, res) => {
                   "success_msg",
                   "You are now registered and can log in."
                 );
-                res.redirect("/user/login");
+                res.redirect("/org/login");
               })
               .catch((err) => console.log(err));
           })
@@ -85,11 +87,12 @@ router.post("/register", (req, res) => {
     });
   }
 });
+
 //Login Handle
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/user/login",
+  passport.authenticate('org-local', {
+    successRedirect: "/org-dashboard",
+    failureRedirect: "/org/login",
     failureFlash: true,
   })(req, res, next);
 });
@@ -98,7 +101,7 @@ router.post("/login", (req, res, next) => {
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "You have logged out");
-  res.redirect("/user/login");
+  res.redirect("/org/login");
 });
 
 module.exports = router;
