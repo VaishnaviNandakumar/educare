@@ -6,5 +6,26 @@
 
 <p class="lead mb-3">Welcome <%= name %> !</p>
 <a href="/user/logout" class="btn btn-secondary">Logout</a>
+
+
+<% if(details!=null) { %>
+<table>
+<tr>
+    <th>Title</th>
+    <th>Decription</th>
+</tr>
+<% details.forEach(function(item){ %>
+<tr>
+    <td><%= item.title%></td>
+    <td><%= item.desc %></td>
+</tr>
+<% }) %>
+</table>
+<% } %>
+
+
+
+
+
 </div>
 </div>    
