@@ -11,11 +11,13 @@
 <% if(details!=null) { %>
 <table>
 <tr>
+    <th>NGO</th>
     <th>Title</th>
     <th>Decription</th>
 </tr>
 <% details.forEach(function(item){ %>
 <tr>
+    <td><%= item.name%></td>
     <td><%= item.title%></td>
     <td><%= item.desc %></td>
 </tr>
