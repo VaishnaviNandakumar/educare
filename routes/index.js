@@ -10,11 +10,21 @@ const requestModel = require("../models/Requests");
 router.get('/', (req, res) => res.render('welcome'));
 
 router.post("/contribute", ensureAuthenticated, function (req, res) {
-  res.render("contribute", {
-    reqID: req.body.id_name,
-  })
+  requestModel.find({'_id' : req.body.id_name}, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("contribute", { details: allDetails, reqID: req.body.id_name });
+    }
+  });
 });
 
+
+//dashboard page
+router.post("/payment", function (req, res) {
+    const { amount } = req.body;
+    res.render("payment", { amt: amount, name: req.user.name });
+});
 
 //dashboard page
 router.get("/dashboard", function (req, res) {

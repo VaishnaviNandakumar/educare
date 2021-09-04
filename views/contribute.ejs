@@ -9,5 +9,41 @@
 <body>
     Contribute
     RequestID  <%= reqID %> !
+
+    <% if(details!=null) { %>
+<table>
+<tr>
+    <th>NGO</th>
+    <th>Title</th>
+    <th>Decription</th>
+</tr>
+<% details.forEach(function(item){ %>
+<tr>
+    <td><%= item.name%></td>
+    <td><%= item.title%></td>
+    <td><%= item.desc %></td>
+    <td>
+        <form method="POST" action="/payment">
+            <form action="/payment" method="POST">
+              <div class="form-group">
+                
+                <input
+                  type="amount"
+                  id="amount"
+                  name="amount"
+                  class="amount"
+                  placeholder="Enter Amount"
+                />
+              </div>
+              
+              <button type="submit" class="btn btn-block">Confirm Payment</button>
+            </form>
+        </form>
+    </td>
+    
+</tr>
+<% }) %>
+</table>
+<% } %>
 </body>
 </html>
