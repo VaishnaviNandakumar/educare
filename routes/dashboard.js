@@ -9,6 +9,8 @@ router.get("/create-request", ensureAuthenticated, (req, res) =>
   })
 );
 
+
+
 router.post("/create-request", (req, res) => {
     const { title, desc } = req.body;
     Requests.findOne({ title: title }).then((user) => {
@@ -17,15 +19,19 @@ router.post("/create-request", (req, res) => {
         errors.push({ msg: "Duplicate Post" });
           res.render("create-request", {
             title,
-            desc
+            desc,
+            total
         });
         } else {
         
         var name = req.user.name;
+        var current = 0;
         const post = new Requests({
             name,
             title,
-            desc
+            desc,
+            total,
+            current
         });
         //Save user
         post.save()

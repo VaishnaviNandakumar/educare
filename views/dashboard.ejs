@@ -20,6 +20,13 @@
     <td><%= item.name%></td>
     <td><%= item.title%></td>
     <td><%= item.desc %></td>
+    <td>
+        <form method="POST" action="/contribute">
+            <input type="hidden" name="id_name" value="<%= item._id %>">
+            <button type="submit" value="Contribute">
+        </form>
+    </td>
+    
 </tr>
 <% }) %>
 </table>

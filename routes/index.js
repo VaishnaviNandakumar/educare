@@ -1,3 +1,4 @@
+const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
@@ -8,6 +9,13 @@ const requestModel = require("../models/Requests");
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
 
+router.post("/contribute", ensureAuthenticated, function (req, res) {
+  res.render("contribute", {
+    reqID: req.body.id_name,
+  })
+});
+
+
 //dashboard page
 router.get("/dashboard", function (req, res) {
   requestModel.find({}, function (err, allDetails) {
@@ -17,6 +25,10 @@ router.get("/dashboard", function (req, res) {
       res.render("dashboard", { details: allDetails, name: req.user.name });
     }
   });
+});
+
+router.post("/dashboard", function (req, res) {
+   res.redirect("/contribute")
 });
 
 router.get("/org-dashboard", ensureAuthenticated, (req, res) =>

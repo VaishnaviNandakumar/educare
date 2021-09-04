@@ -17,6 +17,16 @@ var userSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
+  total: {
+    type: Number,
+    required: true,
+    index: true,
+  },
+  current: {
+    type: Number,
+    required: true,
+    index: true,
+  }
 });
 // Export the model
 module.exports = mongoose.model("Requests", userSchema);
