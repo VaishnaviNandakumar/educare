@@ -12,7 +12,7 @@ router.get("/create-request", ensureAuthenticated, (req, res) =>
 
 
 router.post("/create-request", (req, res) => {
-    const { title, desc } = req.body;
+    const { title, desc, total } = req.body;
     Requests.findOne({ title: title }).then((user) => {
       if (user) {
        

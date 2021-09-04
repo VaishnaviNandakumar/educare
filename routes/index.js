@@ -22,8 +22,23 @@ router.post("/contribute", ensureAuthenticated, function (req, res) {
 
 //dashboard page
 router.post("/payment", function (req, res) {
-    const { amount } = req.body;
-    res.render("payment", { amt: amount, name: req.user.name });
+    var { amount } = req.body;
+  requestModel.find({ _id: req.body.id_name }, function (err, obj) {
+    const value = obj[0].current;
+    var amt = +amount + +value;
+    requestModel.update(
+      { _id: req.body.id_name },
+      { $set: { current: amt } },
+      function (err, allDetails) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("payment", { amt: amount, name: req.user.name });
+        }
+      }
+    );
+  });
+    
 });
 
 //dashboard page
