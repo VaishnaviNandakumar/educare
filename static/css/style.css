@@ -1,40 +1,40 @@
-.form-group{
+
+body{
+   font-family: 'Raleway', sans-serif !important;
+   background: ghostwhite;
+}
+
+.navbar{
+    margin-left: 10%;
+}
+
+.nav-item{
+    margin-left: 10%;
+    color: black;
+    font-size: 20px;
+    padding: 2px;
     
-    font-family: Montserrat;
+}
+
+.nav-item :hover{
+    color: blue !important;
+    border-bottom: 1px solid rgb(12, 9, 207);
+}
+
+
+.container{
+    padding: 50px;
+}
+
+.intro{
+    margin-top: 20%;
 }
 
 .btn{
-color: white;
-background: #0994FF;
-border-color: #0994FF;
-border-radius: 20px;
-
-}
-
-a:hover {
-    color:  #0994FF;
-  }
-
-.submitlink{
-    color:  #0994FF;
-}
-
-.inputfield{
-    border-radius: 10px;
+    margin-top: 2% !important;
 }
 
 .card{
-    border: 30px solid  #0994FF;
-    border-radius: 20px;
-}
-
-.content{
-    padding: 20px;
-    border: 5px solid  #0994FF;
-    border-radius: 20px;
-
-}
-
-.text-center{
-    padding:40px;
+    margin-top: 15%;
+    margin-left: 20%;
 }

@@ -8,6 +8,8 @@ const requestModel = require("../models/Requests");
  
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
+router.get('/about', (req, res) => res.render('about'));
+router.get("/contact", (req, res) => res.render('contact'));
 
 router.post("/contribute", ensureAuthenticated, function (req, res) {
   requestModel.find({'_id' : req.body.id_name}, function (err, allDetails) {
@@ -20,7 +22,7 @@ router.post("/contribute", ensureAuthenticated, function (req, res) {
 });
 
 
-//dashboard page
+
 router.post("/payment", function (req, res) {
     var { amount } = req.body;
   requestModel.find({ _id: req.body.id_name }, function (err, obj) {
