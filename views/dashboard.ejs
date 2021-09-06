@@ -9,31 +9,32 @@
 
     <h4>Welcome <%= name %> !</h4> <br>
     <h4 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h4>
-<% if(details!=null) { %>
+    <% if(details!=null) { %>
+    <% details.forEach(function(item){ %>
+        <div class="request-class card">
+            <div class="row">
+            <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+            <div class="col-6"><h5><%= item.name%></h5></div>
 
-<% details.forEach(function(item){ %>
-    <div class="request-class card">
-        <div class="row">
-           <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
-           <div class="col-6"><h5><%= item.name%></h5></div>
-
-        </div>
-        <div class="row">
-            <div class="col-10 request-content">
-                <%= item.desc %>
             </div>
-            <div class="col-2">
-                <form method="POST" action="/contribute">
-                    <input type="hidden" name="id_name" value="<%= item._id %>">
-                    <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
-                </form>
-           </div>
+            <div class="row">
+                <div class="col-10 request-content">
+                    <%= item.desc %>
+                </div>
+                <div class="col-2">
+                    <form method="POST" action="/contribute">
+                        <input type="hidden" name="id_name" value="<%= item._id %>">
+                        <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
+                    </form>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Progress :  <%= item.current %> /  <%= item.total %> raised!
+                </div>
+            </div>
         </div>
-    </div>
-<% }) %>
-
-<% } %>
-
-
+    <% }) %>
+    <% } %>
 </div>
 </div>    

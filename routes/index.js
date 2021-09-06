@@ -58,11 +58,15 @@ router.post("/dashboard", function (req, res) {
    res.redirect("/contribute")
 });
 
-router.get("/org-dashboard", ensureAuthenticated, (req, res) =>
-  res.render("org-dashboard", {
-    name: req.user.name,
-  })
-);
+router.get("/org-dashboard", ensureAuthenticated, function (req, res) {
+  requestModel.find({name : req.user.name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("org-dashboard", { details: allDetails, name: req.user.name });
+    }
+  });
+});
 
 
 

@@ -91,6 +91,18 @@ color: white;
     font-size: 20px;
 }
 
+.btn-req{
+    font-weight: bold;
+    letter-spacing: 2px;
+    background-color: rgb(13, 156, 73);
+    color: white;
+    border: none;
+    padding: 5px;
+    width: 50%;
+    margin-top: 5% !important;
+    margin-left: 20%;
+}
+
 .btn-contribute{
     margin-left: 5% !important;
     font-weight: bold;

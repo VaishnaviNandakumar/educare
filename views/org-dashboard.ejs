@@ -1,14 +1,36 @@
 <title>Dashboard</title>
-<div class="col-md-6 m-auto">
-<br>
-<br>  
 <div class= "content">
-<h1 class="mt-4">Organization Dashboard</h1>
 
-<p class="lead mb-3">Welcome <%= name %> !</p>
-<div class="container">
-<a href="/org-dashboard/create-request" class="btn btn-secondary">Create Request</a>
+    <div class="row">
+        <div class="col-10"><h2><b>Organization Dashboard</b></h2></div>
+        <div class="col-2"><a href="/org/login" class="btn btn-secondary">Logout</a></div>
+    </div>
+
+    <p class="lead mb-3">Welcome <%= name %> !</p>
+    <a href="/org-dashboard/create-request" class="btn btn-secondary user-login-main">Create Request</a>
+
+    <div class="submitted-requests">
+        <% if(details!=null) { %>
+        <% details.forEach(function(item){ %>
+            <div class="request-class card">
+                <div class="row">
+                <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+                <div class="col-6"><h5><%= item.name%></h5></div>
+
+                </div>
+                <div class="row">
+                    <div class="col-10 request-content">
+                        <%= item.desc %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Progress :  <%= item.current %> /  <%= item.total %> raised!
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        <% } %>
+    </div>
 </div>
-<a href="/user/logout" class="btn btn-secondary">Logout</a>
-</div>
-</div>    
+
