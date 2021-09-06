@@ -1,39 +1,38 @@
-<div class="col-md-6 m-auto">
-<br>
-<br>  
+<title>User Dashboard</title>
+<div class="col12 m-auto">
 <div class= "content">
-<h1 class="mt-4">Dashboard</h1>
-
-<p class="lead mb-3">Welcome <%= name %> !</p>
-<a href="/user/logout" class="btn btn-secondary">Logout</a>
-
-
-<% if(details!=null) { %>
-<table>
-<tr>
-    <th>NGO</th>
-    <th>Title</th>
-    <th>Decription</th>
-</tr>
-<% details.forEach(function(item){ %>
-<tr>
-    <td><%= item.name%></td>
-    <td><%= item.title%></td>
-    <td><%= item.desc %></td>
-    <td>
-        <form method="POST" action="/contribute">
-            <input type="hidden" name="id_name" value="<%= item._id %>">
-            <button type="submit" value="Contribute">Contribute</button>
-        </form>
-    </td>
     
-</tr>
+    <div class="row">
+        <div class="col-10"><h2><b>Dashboard</b></h2></div>
+        <div class="col-2"><a href="/user/logout" class="btn btn-secondary">Logout</a></div>
+    </div>
+
+    <h4>Welcome <%= name %> !</h4> <br>
+    <h4 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h4>
+<% if(details!=null) { %>
+
+<% details.forEach(function(item){ %>
+    <div class="request-class card">
+        <div class="row">
+           <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+           <div class="col-6"><h5><%= item.name%></h5></div>
+
+        </div>
+        <div class="row">
+            <div class="col-10 request-content">
+                <%= item.desc %>
+            </div>
+            <div class="col-2">
+                <form method="POST" action="/contribute">
+                    <input type="hidden" name="id_name" value="<%= item._id %>">
+                    <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
+                </form>
+           </div>
+        </div>
+    </div>
 <% }) %>
-</table>
+
 <% } %>
-
-
-
 
 
 </div>
