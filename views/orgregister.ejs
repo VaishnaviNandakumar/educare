@@ -1,8 +1,9 @@
+<title>Organization Register</title>
 <div class="row mt-5">
    <div class="col-md-6 m-auto">
       <div class="card card-body">
          <h1 class="text-center mb-3">
-            <i class="fas fa-user-plus"></i> Register an Organization
+            Register an Organization
             <br>
          </h1>
          <% include ./partials/messages %>
@@ -67,11 +68,11 @@
                   value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
                   />
             </div>
-            <button type="submit" class="btn btn-block">
+            <button type="submit" class="btn btn-block main-btn">
             Register
             </button>
          </form>
-         <p class="lead mt-4">Have An Account? <a class = "submitlink" href="/user/login">Login</a></p>
+         <p class="lead mt-4">Have An Account? <a class = "submitlink" href="/org/login">Login</a></p>
       </div>
    </div>
 </div>
