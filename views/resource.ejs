@@ -1,13 +1,13 @@
-<title>Monetary Support</title>
+<title>Resource Support</title>
 <div class="row mt-5">
    <div class="col-md-6 m-auto">
       <div class="card card-body">
          <h1 class="text-center mb-3">
-            <i class="fas fa-user-plus"></i> Create Financial Request
+             Create Resource Request
             <br>
          </h1>
          <% include ./partials/messages %>
-         <form action="/org-dashboard/create-request" method="POST">
+         <form action="/org-dashboard/resource" method="POST">
             <div class="form-group" >
                <input 
                   type="title"
@@ -30,14 +30,39 @@
             </div>
             <div class="form-group">
                <input
-                  type="total"
-                  id="total"
-                  name="total"
+                  type="qty"
+                  id="qty"
+                  name="qty"
                   class="form-control"
-                  placeholder="Enter Total Funding"
+                  placeholder="Enter Quantity"
                   value="<%= typeof Value != 'undefined' ? Value : '' %>"
                   />
             </div>
+
+             <div class="form-group">
+               <input
+                  type="brand"
+                  id="brand"
+                  name="brand"
+                  class="form-control"
+                  placeholder="Model Specification"
+                  value="<%= typeof Value != 'undefined' ? Value : '' %>"
+                  />
+            </div>
+
+
+             <div class="form-group">
+               <input
+                  type="model"
+                  id="model"
+                  name="model"
+                  class="form-control"
+                  placeholder="Model Specification"
+                  value="<%= typeof Value != 'undefined' ? Value : '' %>"
+                  />
+            </div>
+
+
             <button type="submit" class="btn btn-block btn-req">
             Submit Request
             </button>

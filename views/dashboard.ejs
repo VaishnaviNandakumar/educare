@@ -9,6 +9,7 @@
 
     <h4>Welcome <%= name %> !</h4> <br>
     <h4 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h4>
+    <h3>Financial Requests</h3>
     <% if(details!=null) { %>
     <% details.forEach(function(item){ %>
         <div class="request-class card">
@@ -26,7 +27,7 @@
                         <input type="hidden" name="id_name" value="<%= item._id %>">
                         <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
                     </form>
-            </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -36,5 +37,40 @@
         </div>
     <% }) %>
     <% } %>
+
+    <h3>Resource Requests</h3>
+    <% if(resourceDetails!=null) { %>
+        <% resourceDetails.forEach(function(entry){ %>
+            <div class="request-class card">
+                <div class="row">
+                <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
+                <div class="col-6"><h5><%= entry.name%></h5></div>
+                </div>
+                <div class="row">
+                    <div class="col-10 request-content">
+                        <%= entry.desc %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h4>Specifications</h4>
+                        <b>Brand : </b> <%= entry.brand%> <br>
+                        <b>Model : </b> <%= entry.model%>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
+                    </div>
+                    <div class="col-2">
+                        <form method="POST" action="/res-contribute">
+                            <input type="hidden" name="id_name" value="<%= entry._id %>">
+                            <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+        <% } %>
 </div>
 </div>    

@@ -5,26 +5,73 @@ const {ensureAuthenticated} = require('../config/auth');
 
 
 const requestModel = require("../models/Requests");
+const resourceModel = require("../models/Resource");
  
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
 router.get('/about', (req, res) => res.render('about'));
 router.get("/contact", (req, res) => res.render('contact'));
 
-router.post("/contribute", ensureAuthenticated, function (req, res) {
-  requestModel.find({'_id' : req.body.id_name}, function (err, allDetails) {
+
+router.get("/dashboard", ensureAuthenticated, function (req, res) {
+  requestModel.find({}, function (err, allDetails) {
     if (err) {
       console.log(err);
     } else {
-      res.render("contribute", { details: allDetails, reqID: req.body.id_name });
+      resourceModel.find({}, function (err, resourceInfo) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("dashboard", {
+            details: allDetails,
+            resourceDetails: resourceInfo,
+            name: req.user.name,
+          });
+        }
+      });
     }
   });
 });
 
+router.post("/dashboard", function (req, res) {
+   res.redirect("/contribute")
+});
 
+router.get("/org-dashboard", ensureAuthenticated, function (req, res) {
+  requestModel.find({name : req.user.name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+       resourceModel.find({ name: req.user.name }, function (err, resourceInfo) {
+         if (err) {
+           console.log(err);
+         } else {
+           res.render("org-dashboard", {
+             details: allDetails,
+             resourceDetails : resourceInfo,
+             name: req.user.name,
+           });
+         }
+       });
+    }
+  });
+});
+
+router.post("/contribute", ensureAuthenticated, function (req, res) {
+  requestModel.find({ _id: req.body.id_name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("contribute", {
+        details: allDetails,
+        reqID: req.body.id_name,
+      });
+    }
+  });
+});
 
 router.post("/payment", function (req, res) {
-    var { amount } = req.body;
+  var { amount } = req.body;
   requestModel.find({ _id: req.body.id_name }, function (err, obj) {
     const value = obj[0].current;
     var amt = +amount + +value;
@@ -40,33 +87,8 @@ router.post("/payment", function (req, res) {
       }
     );
   });
-    
 });
 
-//dashboard page
-router.get("/dashboard", function (req, res) {
-  requestModel.find({}, function (err, allDetails) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("dashboard", { details: allDetails, name: req.user.name });
-    }
-  });
-});
-
-router.post("/dashboard", function (req, res) {
-   res.redirect("/contribute")
-});
-
-router.get("/org-dashboard", ensureAuthenticated, function (req, res) {
-  requestModel.find({name : req.user.name }, function (err, allDetails) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("org-dashboard", { details: allDetails, name: req.user.name });
-    }
-  });
-});
 
 
 
