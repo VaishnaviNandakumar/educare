@@ -1,0 +1,69 @@
+<title>Contribute Resource</title>
+<body>
+  <div class="content">
+    <h2>Thank you for taking the first step!</h2>
+    <h7><b>RequestID  <%= reqID %> !</b></h7>
+    <br>
+   
+    <div class="row">
+      <% if(details!=null) { %>
+      <% details.forEach(function(item){ %>
+      <div class="request-desc">
+        <h5 style="color:rgb(6, 44, 126);"><b>The future you are changing</b></h5>
+        <b>Name of the Organization : </b>
+        <%= item.name%> <br> 
+
+        <b>Cause : </b>
+        <%= item.title%> <br>
+
+        <b>Description : </b>
+          <%= item.desc %> <br>
+      </div>
+
+      <% }) %>
+    <% } %>
+    </div>
+
+    <div class="row">
+      <div class="col-6 payment-form">
+            <form action="/submit-resource" method="POST">
+              <div class="form-group">
+                <input
+                  type="brand"
+                  id="brand"
+                  name="brand"
+                  class="brand"
+                  placeholder="Enter Brand"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="model"
+                  id="model"
+                  name="model"
+                  class="model"
+                  placeholder="Enter Model"
+                />
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="info"
+                  id="info"
+                  name="info"
+                  class="info"
+                  placeholder="Enter Additional Information"
+                />
+              </div>
+
+              <input type="hidden" name="res_name" value="<%= reqID %>">
+              <button type="submit" class="btn btn-block btn-pay">Confirm Resource</button>
+            </form>
+      </div>
+    </div>
+    
+
+</div>
+    
+</body>
+</html>

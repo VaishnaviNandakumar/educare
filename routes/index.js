@@ -6,6 +6,7 @@ const {ensureAuthenticated} = require('../config/auth');
 
 const requestModel = require("../models/Requests");
 const resourceModel = require("../models/Resource");
+const Submissions = require('../models/Submissions');
  
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
@@ -70,6 +71,21 @@ router.post("/contribute", ensureAuthenticated, function (req, res) {
   });
 });
 
+
+router.post("/res-contribute", ensureAuthenticated, function (req, res) {
+  resourceModel.find({ _id: req.body.id_name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("user-resource", {
+        details: allDetails,
+        reqID: req.body.id_name,
+      });
+    }
+  });
+});
+
+
 router.post("/payment", function (req, res) {
   var { amount } = req.body;
   requestModel.find({ _id: req.body.id_name }, function (err, obj) {
@@ -87,6 +103,25 @@ router.post("/payment", function (req, res) {
       }
     );
   });
+});
+
+
+router.post("/submit-resource", (req, res) => {
+  const {brand, model, info } = req.body;
+  var user = req.user.name;
+  var status = "PENDING";
+  var reqID = req.body.res_name;
+  const post = new Submissions({
+    user,
+    reqID,
+    brand,
+    model,
+    info,
+    status,
+  });
+    post.save().then((user) => {
+     res.render("submit-resource", {name: req.user.name });
+    });
 });
 
 
