@@ -8,10 +8,10 @@ const User = require('../models/User')
 
 
 //Login Page
-router.get('/login',(req,res)=> res.render('login'));
+router.get('/login',(req,res)=> res.render('user-login'));
 
 //Register Page
-router.get('/register',(req,res)=> res.render('register'));
+router.get('/register',(req,res)=> res.render('user-register'));
 
 //Register Handle
 router.post('/register',(req,res) => {
@@ -31,7 +31,7 @@ router.post('/register',(req,res) => {
    }
 
    if(errors.length>0){
-       res.render('register',{
+       res.render('user-register',{
            errors,
            name,
            email,
@@ -46,7 +46,7 @@ router.post('/register',(req,res) => {
        .then( user=>{
            if(user){
             errors.push({msg: 'Email is already registered'});
-            res.render('register',{
+            res.render('user-register',{
                 errors,
                 name,
                 email,

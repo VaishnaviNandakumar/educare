@@ -1,0 +1,36 @@
+<title>User Applications</title>
+<div class= "content">
+
+    <h3>Your Applications</h3>
+    Please note that after your application has been approved, we will be contacting you via email.
+    <div class="submitted-requests">
+        <% if(details!=null) { %>
+        <% details.forEach(function(item){ %>
+            <div class="request-class card">
+                <div class="row">
+                <div class="col-6"><h5><%= item.user%></h5></div>
+                 <div class="col-6"><h5><%= item.reqID%></h5></div>
+                </div>
+                <div class="row">
+                    <div class="col request-content">
+                         Brand : <%= item.brand %> <br>
+                         Model : <%= item.model %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Additional Information : <br>
+                        <%= item.brand %> 
+                    </div>
+                </div>
+                <div class="row">
+                    Status :   <%= item.status %> 
+                </div>
+            </div>
+        <% }) %>
+        <% } %>
+    </div>
+    
+
+</div>
+

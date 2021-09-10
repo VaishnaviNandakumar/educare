@@ -20,13 +20,12 @@
           <%= item.desc %> <br>
       </div>
 
-      <% }) %>
-    <% } %>
+
     </div>
 
     <div class="row">
       <div class="col-6 payment-form">
-            <form action="/submit-resource" method="POST">
+            <form action="/dashboard/submit-resource" method="POST">
               <div class="form-group">
                 <input
                   type="brand"
@@ -55,7 +54,7 @@
                   placeholder="Enter Additional Information"
                 />
               </div>
-
+              <input type="hidden" name="org_name" value="<%= item.name %>">
               <input type="hidden" name="res_name" value="<%= reqID %>">
               <button type="submit" class="btn btn-block btn-pay">Confirm Resource</button>
             </form>
@@ -64,6 +63,7 @@
     
 
 </div>
-    
+       <% }) %>
+    <% } %>   
 </body>
 </html>

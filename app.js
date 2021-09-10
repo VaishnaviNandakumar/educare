@@ -11,8 +11,9 @@ const app = express();
 
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
+const dashboardRouter = require('./routes/dashboard');
 const orgRouter = require("./routes/organization");
-const dashboardRouter = require("./routes/dashboard");
+const orgDashboardRouter = require("./routes/org-dashboard");
 
 
 //DB Config
@@ -66,7 +67,8 @@ app.use( (req, res, next) =>{
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use("/org", orgRouter);
-app.use("/org-dashboard", dashboardRouter);
+app.use("/dashboard", dashboardRouter);
+app.use("/org-dashboard", orgDashboardRouter);
 app.use('/static', express.static('static'))
 
 

@@ -1,0 +1,49 @@
+<title>Applications</title>
+<div class= "content">
+
+    <div class="row">
+        <div class="col-10"><h2><b>Organization Dashboard</b></h2></div>
+        <div class="col-2"><a href="/org/login" class="btn btn-secondary">Logout</a></div>
+    </div>
+
+    <h3>Applications</h3>
+    <div class="submitted-requests">
+        <% if(details!=null) { %>
+        <% details.forEach(function(item){ %>
+            <div class="request-class card">
+                <div class="row">
+                <div class="col-6"><h5><%= item.user%></h5></div>
+                 <div class="col-6"><h5><%= item.reqID%></h5></div>
+                </div>
+                <div class="row">
+                    <div class="col request-content">
+                         Brand : <%= item.brand %> <br>
+                         Model : <%= item.model %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Additional Information : <br>
+                        <%= item.brand %> 
+                    </div>
+                </div>
+                <div class="row">
+                    Status :   <%= item.status %> 
+                </div>
+                <div class="row">
+                    <form method="POST" action="/org-dashboard/application">
+                        <input type="hidden" name="resID" value="<%= item._id %>">
+                            <input type="hidden" name="reqID" value="<%= item.reqID %>">
+                            <input type="hidden" name="user_name" value="<%= item.user %>">
+                            <button class="btn-contribute" name="status" type="submit" value="Approve">Approve</button>
+                            <button class="btn" name="status" type="submit" value="Reject">Reject</button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+        <% } %>
+    </div>
+    
+
+</div>
+

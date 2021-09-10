@@ -3,7 +3,8 @@
 <div class= "content">
     
     <div class="row">
-        <div class="col-10"><h2><b>Dashboard</b></h2></div>
+        <div class="col-6"><h2><b>Dashboard</b></h2></div>
+        <div class="col-4"><a href="/dashboard/view-applications" class="btn btn-secondary">View Application Status</a></div>
         <div class="col-2"><a href="/user/logout" class="btn btn-secondary">Logout</a></div>
     </div>
 
@@ -23,7 +24,7 @@
                     <%= item.desc %>
                 </div>
                 <div class="col-2">
-                    <form method="POST" action="/contribute">
+                    <form method="POST" action="/dashboard/fund-contribution">
                         <input type="hidden" name="id_name" value="<%= item._id %>">
                         <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
                     </form>
@@ -63,7 +64,8 @@
                         Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
                     </div>
                     <div class="col-2">
-                        <form method="POST" action="/res-contribute">
+                        <form method="POST" action="/dashboard/resource-contribution">
+                            <input type="hidden" name="org_name" value="<%= entry.name %>">
                             <input type="hidden" name="id_name" value="<%= entry._id %>">
                             <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
                         </form>

@@ -7,10 +7,10 @@ const passport = require("passport");
 const Organization = require("../models/Organization");
 
 //Login Page
-router.get("/login", (req, res) => res.render("orglogin"));
+router.get("/login", (req, res) => res.render("org-login"));
 
 //Register Page
-router.get("/register", (req, res) => res.render("orgregister"));
+router.get("/register", (req, res) => res.render("org-register"));
 
 //Register Handle
 router.post("/register", (req, res) => {
@@ -30,7 +30,7 @@ router.post("/register", (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render("orgregister", {
+    res.render("org-register", {
       errors,
       name,
       email,
@@ -44,7 +44,7 @@ router.post("/register", (req, res) => {
     Organization.findOne({ email: email }).then((user) => {
       if (user) {
         errors.push({ msg: "Organization already registered" });
-        res.render("register", {
+        res.render("org-register", {
           errors,
           name,
           email,

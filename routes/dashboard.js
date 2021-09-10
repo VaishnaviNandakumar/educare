@@ -1,87 +1,87 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
+
 const Requests = require("../models/Requests");
 const Resource = require("../models/Resource");
+const Submissions = require("../models/Submissions");
 
-router.get("/create-request", ensureAuthenticated, (req, res) =>
-  res.render("create-request", {
-    name: req.user.name,
-  })
-);
-
-router.get("/resource", ensureAuthenticated, (req, res) =>
-  res.render("resource", {
-    name: req.user.name,
-  })
-);
-
-router.post("/create-request", (req, res) => {
-    const { title, desc, total } = req.body;
-    Requests.findOne({ title: title }).then((user) => {
-      if (user) {
-       
-        errors.push({ msg: "Duplicate Post" });
-          res.render("create-request", {
-            title,
-            desc,
-            total
-        });
-        } else {
-        
-        var name = req.user.name;
-        var current = 0;
-        const post = new Requests({
-            name,
-            title,
-            desc,
-            total,
-            current
-        });
-        //Save user
-        post.save()
-        .then((user) => {
-        res.redirect("/org-dashboard");
-        })
-        }
-    });
-  
-});
-
-
-router.post("/resource", (req, res) => {
-  const { title, desc, qty, brand, model } = req.body;
-  Resource.findOne({ title: title }).then((user) => {
-    if (user) {
-      errors.push({ msg: "Duplicate Post" });
-      res.render("resource", {
-        title,
-        desc,
-        qty,
-        brand,
-        model
-      });
+router.post("/fund-contribution", ensureAuthenticated, function (req, res) {
+  Requests.find({ _id: req.body.id_name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
     } else {
-      var name = req.user.name;
-      var status = "PENDING";
-      var current = 0;
-      const post = new Resource({
-        name,
-        title,
-        desc,
-        qty,
-        current,
-        brand,
-        model,
-        status
-      });
-      //Save user
-      post.save().then((user) => {
-        res.redirect("/org-dashboard");
+      res.render("user-fund-contribution", {
+        details: allDetails,
+        reqID: req.body.id_name,
       });
     }
   });
 });
 
+router.post("/resource-contribution", ensureAuthenticated, function (req, res) {
+  Resource.find({ _id: req.body.id_name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("user-resource-contribution", {
+        details: allDetails,
+        reqID: req.body.id_name,
+      });
+    }
+  });
+});
+
+router.post("/payment", ensureAuthenticated, function (req, res) {
+  var { amount } = req.body;
+  Requests.find({ _id: req.body.id_name }, function (err, obj) {
+    const value = obj[0].current;
+    var amt = +amount + +value;
+    Requests.update(
+      { _id: req.body.id_name },
+      { $set: { current: amt } },
+      function (err, allDetails) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("user-payment", { amt: amount, name: req.user.name });
+        }
+      }
+    );
+  });
+});
+
+router.post("/submit-resource", ensureAuthenticated, (req, res) => {
+  const { brand, model, info } = req.body;
+  var user = req.user.name;
+  var status = "PENDING";
+  var reqID = req.body.res_name;
+  var org = req.body.org_name;
+  const post = new Submissions({
+    org,
+    user,
+    reqID,
+    brand,
+    model,
+    info,
+    status,
+  });
+  post.save().then((user) => {
+    res.render("user-submit-resource", { name: req.user.name });
+  });
+});
+
+router.get("/view-applications", ensureAuthenticated, function (req, res) {
+  Submissions.find({ user: req.user.name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("user-application-status", {
+        details: allDetails,
+        name: req.user.name,
+      });
+    }
+  });
+});
 
 module.exports = router;

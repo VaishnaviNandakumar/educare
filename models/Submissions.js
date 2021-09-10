@@ -2,6 +2,11 @@
 const mongoose = require("mongoose");
 // Declare the Schema of the Mongo model
 var userSchema = new mongoose.Schema({
+  org: {
+    type: String,
+    required: true,
+    index: true,
+  },
   user: {
     type: String,
     required: true,
