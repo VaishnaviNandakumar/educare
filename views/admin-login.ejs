@@ -1,0 +1,39 @@
+<title>Admin Login</title>
+<div class="row mt-5">
+        <div class="col-md-6 m-auto">
+          <div class="card card-body">
+          <h1 class="text-center mb-3">
+            Admin Login
+            <br>
+           </h1>
+            <br>
+            <% include ./partials/messages %>
+            <form action="/admin-login" method="POST">
+              <div class="form-group">
+                
+                <input
+                  type="adminID"
+                  id="adminID"
+                  name="adminID"
+                  class="form-control"
+                  placeholder="Enter Admin ID"
+                />
+              </div>
+              <div class="form-group">
+                
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <button type="submit" class="btn btn-block main-btn">Login</button>
+            </form>
+            <p class="lead mt-4">
+              No Account? <a href="/admin-register" class= "submitlink">Register</a>
+            </p>
+          </div>
+        </div>
+      </div>

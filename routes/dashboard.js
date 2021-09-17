@@ -13,6 +13,7 @@ router.post("/fund-contribution", ensureAuthenticated, function (req, res) {
     } else {
       res.render("user-fund-contribution", {
         details: allDetails,
+        
         reqID: req.body.id_name,
       });
     }

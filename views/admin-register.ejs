@@ -1,0 +1,49 @@
+<title>Admin Register</title>
+<div class="row mt-5">
+   <div class="col-md-6 m-auto">
+      <div class="card card-body">
+         <h1 class="text-center mb-3">
+            Admin Portal
+            <br>
+         </h1>
+         <% include ./partials/messages %>
+         <form action="/admin-register" method="POST">
+            <div class="form-group" >
+               <input 
+                  type="adminID"
+                  id="adminID"
+                  name="adminID"
+                  class="form-control"
+                  placeholder="Enter Admin ID"
+                  value="<%= typeof adminID != 'undefined' ? name : '' %>"
+                  />
+            </div>
+
+            <div class="form-group">
+               <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Create Password"
+                  value="<%= typeof password != 'undefined' ? password : '' %>"
+                  />
+            </div>
+            <div class="form-group">
+               <input
+                  type="password"
+                  id="password2"
+                  name="password2"
+                  class="form-control"
+                  placeholder="Confirm Password"
+                  value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+                  />
+            </div>
+            <button type="submit" class="btn btn-block main-btn">
+            Register
+            </button>
+         </form>
+         <p class="lead mt-4">Have An Account? <a class = "submitlink" href="/admin-login">Login</a></p>
+      </div>
+   </div>
+</div>

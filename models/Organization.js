@@ -37,11 +37,11 @@ var userSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
-  role: {
+  status: {
     type: String,
     required: true,
     index: true,
-  },
+  }
 });
 // Export the model
 module.exports = mongoose.model("Organization", userSchema);

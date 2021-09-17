@@ -10,6 +10,7 @@
     <div class="submitted-requests">
         <% if(details!=null) { %>
         <% details.forEach(function(item){ %>
+        <% if(item.status=="PENDING"){ %>    
             <div class="request-class card">
                 <div class="row">
                 <div class="col-6"><h5><%= item.user%></h5></div>
@@ -35,15 +36,18 @@
                         <input type="hidden" name="resID" value="<%= item._id %>">
                             <input type="hidden" name="reqID" value="<%= item.reqID %>">
                             <input type="hidden" name="user_name" value="<%= item.user %>">
-                            <button class="btn-contribute" name="status" type="submit" value="Approve">Approve</button>
-                            <button class="btn" name="status" type="submit" value="Reject">Reject</button>
+                            <button class="btn btn-success" name="status" type="submit" value="APPROVED">Approve</button>
+                            <button class="btn btn-danger" name="status" type="submit" value="REJECTED">Reject</button>
                     </form>
                 </div>
             </div>
+        <% } %> 
         <% }) %>
-        <% } %>
+       
+        <% } else { %>
+           <h2>Your application feed is currently empty.</h2> 
+        <% } %>    
+        
     </div>
-    
-
 </div>
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
+const Organization = require("../models/Organization");
 const Requests = require("../models/Requests");
 const Resource = require("../models/Resource");
 const Submissions = require("../models/Submissions");
@@ -72,6 +73,18 @@ router.get("/applications", ensureAuthenticated, function (req, res) {
     });
 });
 
+router.get("/verify", ensureAuthenticated, function (req, res) {
+  Organization.find({ name : req.user.name }, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("org-verification", {
+        details: allDetails,
+        name: req.user.name,
+      });
+    }
+  });
+});
 
 router.post("/application", ensureAuthenticated,  function (req, res) {
   Submissions.find({_id: req.body.resID }, function (err, obj) {

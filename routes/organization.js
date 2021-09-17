@@ -54,14 +54,14 @@ router.post("/register", (req, res) => {
           password2,
         });
       } else {
-        var role = "org";
+        var status = "PENDING";
         const newUser = new Organization({
           name,
           email,
           location,
           funding,
           password,
-          role
+          status
         });
       
         //Hash Password
@@ -97,11 +97,12 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-//Logout Handle
+
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "You have logged out");
   res.redirect("/org/login");
 });
+
 
 module.exports = router;

@@ -1,12 +1,38 @@
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-
-//Load User Model
 const User = require("../models/User");
 const Organization = require("../models/Organization");
+const Admin = require("../models/Admin");
 
 module.exports = function (passport) {
+    passport.use(
+      "admin-local",
+      new LocalStrategy(
+        { usernameField: "adminID" },
+        (adminID, password, done) => {
+          Admin.findOne({ adminID: adminID })
+            .then((user) => {
+              if (!user) {
+                return done(null, false, {
+                  message: "Invalid Admin ID",
+                });
+              }
+              //Match password
+              bcrypt.compare(password, user.password, (err, isMatch) => {
+                if (err) throw err;
+                if (isMatch) {
+                  return done(null, user);
+                } else {
+                  return done(null, false, { message: "Password Incorrect" });
+                }
+              });
+            })
+            .catch((err) => console.log(err));
+        }
+      )
+    );
+
   passport.use(
     "user-local",
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
