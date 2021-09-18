@@ -133,3 +133,9 @@ h3{
     padding: 5px;
     width: 50%;
 }
+
+.res-img img{
+    padding: 10px;
+    width: 30%;
+    height : 250px;
+}

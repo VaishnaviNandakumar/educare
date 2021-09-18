@@ -40,8 +40,28 @@ var userSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
+    default: 'PENDING',
     index: true,
-  }
+  },
+  representative: {
+    type: String,
+    default: '',
+    index: true,
+  },
+  contact1: {
+    type: String,
+    default: '',
+    index: true,
+  },
+  contact2: {
+    type: String,
+    default: '',
+    index: true,
+  },
+  file1: {
+    contentType: String,
+    default: ""
+  },
 });
 // Export the model
 module.exports = mongoose.model("Organization", userSchema);

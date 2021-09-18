@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
-
+const upload = require("../multer-storage/multer");
 const Requests = require("../models/Requests");
 const Resource = require("../models/Resource");
+var fs = require("fs");
+var path = require("path");
 const Submissions = require("../models/Submissions");
 
 router.post("/fund-contribution", ensureAuthenticated, function (req, res) {
@@ -13,7 +15,6 @@ router.post("/fund-contribution", ensureAuthenticated, function (req, res) {
     } else {
       res.render("user-fund-contribution", {
         details: allDetails,
-        
         reqID: req.body.id_name,
       });
     }
@@ -52,7 +53,7 @@ router.post("/payment", ensureAuthenticated, function (req, res) {
   });
 });
 
-router.post("/submit-resource", ensureAuthenticated, (req, res) => {
+router.post("/submit-resource", upload.single('image') , ensureAuthenticated, (req, res) => {
   const { brand, model, info } = req.body;
   var user = req.user.name;
   var status = "PENDING";
@@ -66,6 +67,15 @@ router.post("/submit-resource", ensureAuthenticated, (req, res) => {
     model,
     info,
     status,
+    image: {
+      data: fs.readFileSync(
+        path.join(
+          "C:\\Users\\Vaishnavi\\Desktop\\ibm-hack\\uploads\\" +
+            req.file.filename
+        )
+      ),
+      contentType: "image/png",
+    },
   });
   post.save().then((user) => {
     res.render("user-submit-resource", { name: req.user.name });

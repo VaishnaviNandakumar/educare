@@ -14,30 +14,9 @@ const Admin = require('../models/Admin');
  
 //welcome page
 router.get('/', (req, res) => res.render('welcome'));
-router.get('/admin-login', (req, res) => res.render('admin-login'));
-router.get("/admin-register", (req, res) => res.render("admin-register"));
 router.get('/about', (req, res) => res.render('about'));
 router.get("/contact", (req, res) => res.render('contact'));
 
-router.get("/admin-dashboard", function (req, res) {
-  Organization.find({}, function (err, orgInfo) {
-    if (err) {
-      console.log(err);
-    } else {
-
-      User.find({}, function (err, userInfo) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render("admin-dashboard", {
-            userDetails: orgInfo,
-            orgDetails: userInfo,
-          });
-        }
-      });
-    }
-  });
-});
 
 
 router.get("/dashboard", ensureAuthenticated, function (req, res) {
@@ -84,75 +63,6 @@ router.get("/org-dashboard", ensureAuthenticated, function (req, res) {
   });
 });
 
-router.post("/admin-login", (req, res, next) => {
-  passport.authenticate("admin-local", {
-    successRedirect: "/admin-dashboard",
-    failureRedirect: "/admin-login",
-    failureFlash: true,
-  })(req, res, next);
-});
-
-router.post("/admin-register", (req, res) => {
-  const { adminID, password, password2 } = req.body;
-  let errors = [];
-
-  if (!adminID || !password || !password2) {
-    errors.push({ msg: "Please fill in all fields." });
-  }
-  //Check required fields
-  if (password != password2) {
-    errors.push({ msg: "Passwords do not match!" });
-  }
-
-  if (password.length < 8) {
-    errors.push({ msg: "Your password must contain atleast 8 characters." });
-  }
-
-  if (errors.length > 0) {
-    res.render("user-register", {
-      adminID,
-      password,
-      password2,
-    });
-  } else {
-    //Validation passed
-    Admin.findOne({ adminID : adminID }).then((user) => {
-      if (user) {
-        errors.push({ msg: "Email is already registered" });
-        res.render("user-register", {
-          adminID,
-          password,
-          password2,
-        });
-      } else {
-        const newUser = new Admin({
-          adminID,
-          password
-        });
-
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            //Set password to hashed
-            newUser.password = hash;
-
-            //Save user
-            newUser
-              .save()
-              .then((user) => {
-                req.flash(
-                  "success_msg",
-                  "You are now registered and can log in."
-                );
-                res.redirect("/admin-login");
-              })
-              .catch((err) => console.log(err));
-          })
-        );
-      }
-    });
-  }
-});
 
 
 module.exports = router;

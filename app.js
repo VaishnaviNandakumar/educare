@@ -9,6 +9,7 @@ const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
+const adminRouter = require("./routes/admin");
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
 const dashboardRouter = require('./routes/dashboard');
@@ -63,8 +64,11 @@ app.use( (req, res, next) =>{
   next();
 });
 
+
+
 //Routes
 app.use('/', indexRouter);
+app.use("/admin", adminRouter);
 app.use('/user', userRouter);
 app.use("/org", orgRouter);
 app.use("/dashboard", dashboardRouter);

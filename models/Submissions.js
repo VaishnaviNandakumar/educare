@@ -37,6 +37,10 @@ var userSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 // Export the model
 module.exports = mongoose.model("Submissions", userSchema);

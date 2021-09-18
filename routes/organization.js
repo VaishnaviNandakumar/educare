@@ -54,14 +54,13 @@ router.post("/register", (req, res) => {
           password2,
         });
       } else {
-        var status = "PENDING";
+
         const newUser = new Organization({
           name,
           email,
           location,
           funding,
           password,
-          status
         });
       
         //Hash Password

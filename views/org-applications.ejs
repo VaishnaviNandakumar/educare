@@ -29,6 +29,13 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col res-img">
+                        Resource Image : <br>
+                        <img src="data:item/<%=item.image.contentType%>;base64,
+                        <%=item.image.data.toString('base64')%>">
+                    </div>
+                </div>
+                <div class="row">
                     Status :   <%= item.status %> 
                 </div>
                 <div class="row">

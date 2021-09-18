@@ -41,7 +41,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true,
     index: true,
-  },
+  }
 });
 // Export the model
 module.exports = mongoose.model("Resource", userSchema);

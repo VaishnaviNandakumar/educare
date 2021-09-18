@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
+var fs = require("fs");
+var path = require("path");
+const  upload = require('../multer-storage/multer');
+
 const Organization = require("../models/Organization");
 const Requests = require("../models/Requests");
 const Resource = require("../models/Resource");
 const Submissions = require("../models/Submissions");
+
+
 
 router.get("/create-funding-request", ensureAuthenticated, (req, res) =>
   res.render("org-funding-request", {
@@ -86,6 +92,33 @@ router.get("/verify", ensureAuthenticated, function (req, res) {
   });
 });
 
+router.post("/verify", upload.single('file1'),  ensureAuthenticated, function (req, res) {
+  var { rep, contact1, contact2} = req.body;
+    Organization.findOneAndUpdate(
+      { name: req.user.name },
+      {
+        $set: {
+          representative: rep,
+          contact1: contact1,
+          contact2: contact2,
+          file1: {
+            data: fs.readFileSync(
+              path.join("C:\\Users\\Vaishnavi\\Desktop\\ibm-hack\\uploads\\" + req.file.filename)
+            ),
+            contentType: "image/png",
+          },
+        },
+      }
+    ).exec(function (err, details) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(req.body);
+        res.redirect("/org-dashboard");
+      }
+    });
+});
+
 router.post("/application", ensureAuthenticated,  function (req, res) {
   Submissions.find({_id: req.body.resID }, function (err, obj) {
     Submissions.update(
@@ -95,6 +128,7 @@ router.post("/application", ensureAuthenticated,  function (req, res) {
         if (err) {
           console.log(err);
         } else {
+
           res.redirect("/org-dashboard/applications");
         }
       }
