@@ -101,12 +101,6 @@ router.post("/verify", upload.single('file1'),  ensureAuthenticated, function (r
           representative: rep,
           contact1: contact1,
           contact2: contact2,
-          file1: {
-            data: fs.readFileSync(
-              path.join("C:\\Users\\Vaishnavi\\Desktop\\ibm-hack\\uploads\\" + req.file.filename)
-            ),
-            contentType: "image/png",
-          },
         },
       }
     ).exec(function (err, details) {
@@ -128,7 +122,6 @@ router.post("/application", ensureAuthenticated,  function (req, res) {
         if (err) {
           console.log(err);
         } else {
-
           res.redirect("/org-dashboard/applications");
         }
       }

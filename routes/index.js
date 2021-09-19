@@ -44,23 +44,26 @@ router.post("/dashboard", function (req, res) {
 });
 
 router.get("/org-dashboard", ensureAuthenticated, function (req, res) {
-  requestModel.find({name : req.user.name }, function (err, allDetails) {
-    if (err) {
-      console.log(err);
-    } else {
-       resourceModel.find({ name: req.user.name }, function (err, resourceInfo) {
-         if (err) {
-           console.log(err);
-         } else {
-           res.render("org-dashboard", {
-             details: allDetails,
-             resourceDetails : resourceInfo,
-             name: req.user.name,
-           });
-         }
-       });
-    }
-  });
+  Organization.find({ name: req.user.name }, function (err, orgInfo) {
+      requestModel.find({ name: req.user.name }, function (err, allDetails) {
+        resourceModel.find(
+          { name: req.user.name },
+          function (err, resourceInfo) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render("org-dashboard", {
+                details: allDetails,
+                resourceDetails: resourceInfo,
+                orgInfo : orgInfo,
+                name: req.user.name,
+              });
+            }
+          }
+        );
+      });
+  })
+
 });
 
 

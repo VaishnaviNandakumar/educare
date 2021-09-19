@@ -106,15 +106,18 @@ router.get("/dashboard", function (req, res) {
 });
 
 
-router.get("/download/:id", (req, res) => {
-  Organization.find({ _id: req.params.id }, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      var x = data[0].file1;
-      res.download(x);
-    }
-  });
+router.post("/dashboard", function (req, res) {
+    Organization.updateOne(
+      { name: req.body.org },
+      { $set: { status: req.body.status } },
+      function (err, allDetails) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.redirect("/admin/dashboard");
+        }
+      }
+    );
 });
 
 

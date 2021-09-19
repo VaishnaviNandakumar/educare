@@ -12,6 +12,17 @@
     <a href="/org-dashboard/verify" class="btn btn-secondary user-login-main">Verification Application</a>
     <a href="/org-dashboard/applications" class="btn btn-secondary user-login-main">View Applications</a>
 
+    <div class="row">
+        <div class="col">
+            <h2>Organization Details</h2>
+            Name : <%= orgInfo[0].name %>
+            Representative : <%= orgInfo[0].representative %> <br>
+            Primary Contact :  <%= orgInfo[0].contact1 %> <br>
+            Secondary Contact : <%= orgInfo[0].contact2 %> <br>
+            Location : <%= orgInfo[0].location %> <br>
+            Verification Status : <%= orgInfo[0].status %>  <br>
+        </div>
+    </div>
     <h3>Financial Requests</h3>
     <div class="submitted-requests">
         <% if(details!=null) { %>

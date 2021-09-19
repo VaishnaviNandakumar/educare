@@ -58,10 +58,6 @@ var userSchema = new mongoose.Schema({
     default: '',
     index: true,
   },
-  file1: {
-    contentType: String,
-    default: ""
-  },
 });
 // Export the model
 module.exports = mongoose.model("Organization", userSchema);

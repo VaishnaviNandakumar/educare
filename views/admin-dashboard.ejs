@@ -9,6 +9,7 @@
         <h3>Organizations for Approval</h3>
         <% if(orgDetails!=null) { %>
         <% orgDetails.forEach(function(item){ %>
+            <% if(item.status=="PENDING"){ %>  
             <div class="request-class card">
                 <div class="row">
                 Name : <%= item.name%> <br>
@@ -17,13 +18,16 @@
                 Secondary Contact : <%= item.contact2%> <br>
                 </div>
                 <div class="row">
-                    <form action="/admin/download/<%= item._id%>" method="GET">
-                    <button type="submit" class="btn btn-block btn-pay">Download</button>
+                    <form method="POST" action="/admin/dashboard">
+                        <input type="hidden" name="org" value="<%= item.name %>">
+                            <button class="btn btn-success" name="status" type="submit" value="APPROVED">Approve</button>
+                            <button class="btn btn-danger" name="status" type="submit" value="REJECTED">Reject</button>
                     </form>
                 </div>
              </div>    
+        <% } %> 
         <% }) %>
         <% } %>
-   
+    </div>
  </div>
 
