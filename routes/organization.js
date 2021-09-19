@@ -40,7 +40,6 @@ router.post("/register", (req, res) => {
       password2,
     });
   } else {
-    //Validation passed
     Organization.findOne({ email: email }).then((user) => {
       if (user) {
         errors.push({ msg: "Organization already registered" });
@@ -90,7 +89,7 @@ router.post("/register", (req, res) => {
 //Login Handle
 router.post("/login", (req, res, next) => {
   passport.authenticate('org-local', {
-    successRedirect: "/org-dashboard",
+    successRedirect: "/org/dashboard",
     failureRedirect: "/org/login",
     failureFlash: true,
   })(req, res, next);

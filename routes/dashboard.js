@@ -8,6 +8,31 @@ var fs = require("fs");
 var path = require("path");
 const Submissions = require("../models/Submissions");
 
+router.get("/", ensureAuthenticated, function (req, res) {
+  Requests.find({}, function (err, allDetails) {
+    if (err) {
+      console.log(err);
+    } else {
+      Resource.find({}, function (err, resourceInfo) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("user-dashboard", {
+            details: allDetails,
+            resourceDetails: resourceInfo,
+            name: req.user.name,
+          });
+        }
+      });
+    }
+  });
+});
+
+router.post("/", function (req, res) {
+  res.redirect("/payment-contribution");
+});
+
+
 router.post("/fund-contribution", ensureAuthenticated, function (req, res) {
   Requests.find({ _id: req.body.id_name }, function (err, allDetails) {
     if (err) {

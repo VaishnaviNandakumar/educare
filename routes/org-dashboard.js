@@ -11,6 +11,25 @@ const Resource = require("../models/Resource");
 const Submissions = require("../models/Submissions");
 
 
+router.get("/", ensureAuthenticated, function (req, res) {
+  Organization.find({ name: req.user.name }, function (err, orgInfo) {
+    Requests.find({ name: req.user.name }, function (err, allDetails) {
+      Resource.find({ name: req.user.name }, function (err, resourceInfo) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("org-dashboard", {
+            details: allDetails,
+            resourceDetails: resourceInfo,
+            orgInfo: orgInfo,
+            name: req.user.name,
+          });
+        }
+      });
+    });
+  });
+});
+
 
 router.get("/create-funding-request", ensureAuthenticated, (req, res) =>
   res.render("org-funding-request", {
@@ -38,7 +57,7 @@ router.post("/create-funding-request", ensureAuthenticated, (req, res) => {
         //Save user
         post.save()
         .then((user) => {
-        res.redirect("/org-dashboard");
+        res.redirect("/org/dashboard");
         })
 });
 
@@ -60,7 +79,7 @@ router.post("/create-resource-request", ensureAuthenticated, (req, res) => {
       });
       //Save user
       post.save().then((user) => {
-        res.redirect("/org-dashboard");
+        res.redirect("/org/dashboard");
       });
 });
 
@@ -108,7 +127,7 @@ router.post("/verify", upload.single('file1'),  ensureAuthenticated, function (r
         console.log(err);
       } else {
         console.log(req.body);
-        res.redirect("/org-dashboard");
+        res.redirect("/org/dashboard");
       }
     });
 });
@@ -122,7 +141,7 @@ router.post("/application", ensureAuthenticated,  function (req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect("/org-dashboard/applications");
+          res.redirect("/org/dashboard/applications");
         }
       }
     );

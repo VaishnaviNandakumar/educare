@@ -71,8 +71,8 @@ app.use('/', indexRouter);
 app.use("/admin", adminRouter);
 app.use('/user', userRouter);
 app.use("/org", orgRouter);
-app.use("/dashboard", dashboardRouter);
-app.use("/org-dashboard", orgDashboardRouter);
+app.use("/user/dashboard", dashboardRouter);
+app.use("/org/dashboard", orgDashboardRouter);
 app.use('/static', express.static('static'))
 
 
