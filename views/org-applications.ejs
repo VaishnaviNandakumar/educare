@@ -39,7 +39,7 @@
                     Status :   <%= item.status %> 
                 </div>
                 <div class="row">
-                    <form method="POST" action="/org-dashboard/application">
+                    <form method="POST" action="/org/dashboard/application">
                         <input type="hidden" name="resID" value="<%= item._id %>">
                             <input type="hidden" name="reqID" value="<%= item.reqID %>">
                             <input type="hidden" name="user_name" value="<%= item.user %>">

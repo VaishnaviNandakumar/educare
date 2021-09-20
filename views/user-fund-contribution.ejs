@@ -1,31 +1,37 @@
 <title>Contribute</title>
-<body>
+
   <div class="content">
-    <h2>Thank you for taking the first step!</h2>
-    <h7><b>RequestID  <%= reqID %> !</b></h7>
-    <br>
-   
     <div class="row">
-      <% if(details!=null) { %>
-      <% details.forEach(function(item){ %>
-      <div class="request-desc">
-        <h5 style="color:rgb(6, 44, 126);"><b>The future you are changing</b></h5>
-        <b>Name of the Organization : </b>
-        <%= item.name%> <br> 
-
-        <b>Cause : </b>
-        <%= item.title%> <br>
-
-        <b>Description : </b>
-          <%= item.desc %> <br>
+      <div class="col">
+        <h1>Thank you for taking the first step!</h1>
       </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <h5 style="color:rgb(6, 44, 126);"><b>The future you are changing</b></h5>
+            <div class="request-desc">
+            <h3>INVOICE</h3>  
+            <% if(details!=null) { %>
+            <% details.forEach(function(item){ %>
+              <b>Request ID</b> : <%= reqID %>  <br>
+              <b>Name of the Organization : </b>
+              <%= item.name%> <br> 
 
-      <% }) %>
-    <% } %>
+              <b>Cause : </b>
+              <%= item.title%> <br>
+
+              <b>Description : </b>
+                <%= item.desc %> <br>
+            <% }) %>
+            <% } %>
+          </div>
+      </div>
     </div>
 
     <div class="row">
-      <div class="col-6 payment-form">
+      <div class="col-8 payment-form">
+        <h3>Your Contribution</h3>
             <form action="/user/dashboard/payment" method="POST">
               <div class="form-group">
                 <input
@@ -37,7 +43,7 @@
                 />
               </div>
               <input type="hidden" name="id_name" value="<%= reqID %>">
-              <button type="submit" class="btn btn-block btn-pay">Confirm Payment</button>
+              <button type="submit" class="btn btn-green">Confirm Payment</button>
             </form>
       </div>
     </div>
@@ -45,5 +51,3 @@
 
 </div>
     
-</body>
-</html>

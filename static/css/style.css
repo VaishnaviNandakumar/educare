@@ -1,30 +1,30 @@
 
 body{
-   font-family: 'Raleway', sans-serif !important;
-   background-image:
-    linear-gradient(
-      to right, 
-      #56B4D3,#93F9B9
-    );
+   font-family: 'Rubik', sans-serif;
+   background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+}
+
+.row{
+    margin-top: 1% !important;
 }
 
 .navbar{
     background-color: #56b4d300 !important;
-    margin-left: 10%;
+    margin-left: 10%; 
 }
 
 .nav-item{
+    margin-top: 2% !important;
     margin-left: 10%;
-    color: #000000 !important;
+    color: #555353 !important;
     font-size: 20px;
     padding: 2px;
-    font-weight: bold;
-    
+   
 }
 
 .nav-item :hover{
-    color: white !important;
-    border-bottom: 1px solid white;
+    color: rgb(1, 102, 68)!important;
+    border-bottom: 1px solid rgb(1, 102, 68);
 }
 
 
@@ -33,53 +33,43 @@ body{
 }
 
 .main-login{
+    padding: 20px;
     margin-left: 15%;
     margin-top: 10%;
+    height: 90% !important;
+    box-shadow: 0px 30px 20px -30px rgba(0, 0, 0, 0.5);
 }
 
 .intro{
     margin-top: 20%;
     color: #323333;
 }
+.intro p{
+    text-align: justify;
+}
 
 .btn{
+    letter-spacing: 1px;
     margin-top: 2% !important;
 }
 
-.card{
-box-shadow: 0px 30px 20px -30px rgba(0, 0, 0, 0.5);
-}
 
 input{
-    margin-top: 2%;
+    width : 50% ;
+    margin-top: 1%;
     padding: 5px;
-}
+    padding-left: 10px !important;
 
-.main-btn{
-font-weight: bold;
-margin-left: 30%;
-width: 30%;
-margin-top: 5% !important;
-background-color: #56B4D3;
-color: white;
 }
-
-.user-login-main{
-    background-color: #56B4D3;
-    border: none;
-}
-
 
 .content{
     background-color: white;
     padding: 50px;
+    
+    border-radius: 30px;
 }
 
-.org-login-main{
-    
-    background-color: #8c8e8f;
-    border: none;
-}
+
 
 .request-class{
     margin-top: 2%;
@@ -91,7 +81,80 @@ color: white;
     font-size: 20px;
 }
 
-.btn-req{
+
+
+.request-desc{
+    margin-top: 3%;
+    font-size: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.payment-form{
+    border-top:  3px solid rgb(49, 96, 158);
+    padding : 20px;
+    margin-top: 5%;
+    box-shadow: 0px 30px 20px -30px rgba(0, 0, 0, 0.5);
+}
+
+
+.res-img img{
+    padding: 10px;
+    width: 30%;
+    height : 250px;
+}
+
+
+.finance-req{
+    padding: 30px;
+    background-color: #9ce4cebb !important;
+    border-radius: 20px;
+}
+
+.resource-req{
+    padding: 30px;
+    background-color: #f3eb7db7 !important;
+    margin-top: 5% !important;
+    border-radius: 20px;
+    
+}
+
+
+
+.main-btn{
+font-weight: bold;
+margin-left: 30%;
+width: 30%;
+margin-top: 5% !important;
+background-color: #56B4D3;
+color: white;
+letter-spacing: 2px;
+}
+
+.home-btn{
+    border: none;
+    letter-spacing: 2px;
+}
+
+.home-btn :hover{
+    font-size: 20px !important;
+}
+
+
+.user-login-main{
+    background-color: #43c9b2;
+}
+
+.org-login-main{
+    background-color: #acb4b8;
+}
+
+.admin-login-main{
+    background-color: #64c9d6;
+}
+
+
+.btn-green{
     font-weight: bold;
     letter-spacing: 2px;
     background-color: rgb(13, 156, 73);
@@ -99,13 +162,8 @@ color: white;
     border: none;
     padding: 5px;
     width: 50%;
-    margin-top: 5% !important;
-    margin-left: 20%;
 }
 
-h3{
-    margin-top: 5%;
-}
 .btn-contribute{
     margin-left: 5% !important;
     font-weight: bold;
@@ -113,29 +171,4 @@ h3{
     border: none;
     padding: 5px;
     width: 85%;
-}
-
-.request-desc{
-    margin-top: 3%;
-    font-size: 20px;
-}
-
-.payment-form{
-    margin-top: 2%;
-}
-
-.btn-pay{
-    font-weight: bold;
-    letter-spacing: 2px;
-    background-color: rgb(13, 156, 73);
-    color: white;
-    border: none;
-    padding: 5px;
-    width: 50%;
-}
-
-.res-img img{
-    padding: 10px;
-    width: 30%;
-    height : 250px;
 }

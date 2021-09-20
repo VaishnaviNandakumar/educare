@@ -126,7 +126,6 @@ router.post("/verify", upload.single('file1'),  ensureAuthenticated, function (r
       if (err) {
         console.log(err);
       } else {
-        console.log(req.body);
         res.redirect("/org/dashboard");
       }
     });
@@ -141,6 +140,21 @@ router.post("/application", ensureAuthenticated,  function (req, res) {
         if (err) {
           console.log(err);
         } else {
+          if (req.body.status == "APPROVED") {
+              Resource.find({ _id: req.body.reqID }, function (err, obj) {
+                const value = obj[0].current;
+                var newValue = value + 1;
+                Resource.update(
+                  { _id: req.body.reqID },
+                  { $set: { current: newValue } },
+                  function (err, allDetails) {
+                    if (err) {
+                      console.log(err);
+                    }
+                  }
+                );
+              });
+          }
           res.redirect("/org/dashboard/applications");
         }
       }

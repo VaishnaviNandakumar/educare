@@ -1,78 +1,91 @@
 <title>User Dashboard</title>
 <div class="col12 m-auto">
 <div class= "content">
-    
     <div class="row">
-        <div class="col-6"><h2><b>Dashboard</b></h2></div>
-        <div class="col-4"><a href="/user/dashboard/view-applications" class="btn btn-secondary">View Application Status</a></div>
-        <div class="col-2"><a href="/user/logout" class="btn btn-secondary">Logout</a></div>
+        <div class="col-10"><h1><b>Dashboard</b></h1></div>
+        <div class="col-2"><a href="/user/logout" class="btn  btn-light">Logout</a></div>
     </div>
 
-    <h4>Welcome <%= name %> !</h4> <br>
-    <h4 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h4>
-    <h3>Financial Requests</h3>
-    <% if(details!=null) { %>
-    <% details.forEach(function(item){ %>
-        <div class="request-class card">
-            <div class="row">
-            <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
-            <div class="col-6"><h5><%= item.name%></h5></div>
+    <div class="row">
+        <div class="col-9"><h4>Welcome <%= name %> !</h4> <br></div>
+        <div class="col-3"><a href="/user/dashboard/view-applications" class="btn btn-info">View Application Status</a></div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <h3 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h3><br>
+            <div class="finance-req">
+                <h3><b>Financial Requests</b></h3>
+                <% if(details!=null) { %>
+                <% details.forEach(function(item){ %>
+                    <div class="request-class card">
+                        <div class="row">
+                        <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+                        <div class="col-6"><h5><%= item.name%></h5></div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-10 request-content">
+                                <%= item.desc %>
+                            </div>
+                            <div class="col-2">
+                                <form method="POST" action="/user/dashboard/fund-contribution">
+                                    <input type="hidden" name="id_name" value="<%= item._id %>">
+                                    <button class="btn btn-contribute" type="submit" value="Contribute">Contribute</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                Progress :  <%= item.current %> /  <%= item.total %> raised!
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                <% } %>
             </div>
-            <div class="row">
-                <div class="col-10 request-content">
-                    <%= item.desc %>
+            
+            <div class="resource-req">
+                <h3><b>Resource Requests</b></h3>
+                <% if(resourceDetails!=null) { %>
+                <% resourceDetails.forEach(function(entry){ %>
+                <div class="request-class card">
+                    <div class="row">
+                    <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
+                    <div class="col-6"><h5><%= entry.name%></h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10 request-content">
+                            <%= entry.desc %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4>Specifications</h4>
+                            <b>Brand : </b> <%= entry.brand%> <br>
+                            <b>Model : </b> <%= entry.model%>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
+                        </div>
+                        <div class="col-2">
+                            <form method="POST" action="/user/dashboard/resource-contribution">
+                                <input type="hidden" name="org_name" value="<%= entry.name %>">
+                                <input type="hidden" name="id_name" value="<%= entry._id %>">
+                                <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <form method="POST" action="/user/dashboard/fund-contribution">
-                        <input type="hidden" name="id_name" value="<%= item._id %>">
-                        <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    Progress :  <%= item.current %> /  <%= item.total %> raised!
-                </div>
+                <% }) %>
+                <% } %>
             </div>
         </div>
-    <% }) %>
-    <% } %>
-
-    <h3>Resource Requests</h3>
-    <% if(resourceDetails!=null) { %>
-        <% resourceDetails.forEach(function(entry){ %>
-            <div class="request-class card">
-                <div class="row">
-                <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
-                <div class="col-6"><h5><%= entry.name%></h5></div>
-                </div>
-                <div class="row">
-                    <div class="col-10 request-content">
-                        <%= entry.desc %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h4>Specifications</h4>
-                        <b>Brand : </b> <%= entry.brand%> <br>
-                        <b>Model : </b> <%= entry.model%>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-10">
-                        Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
-                    </div>
-                    <div class="col-2">
-                        <form method="POST" action="/user/dashboard/resource-contribution">
-                            <input type="hidden" name="org_name" value="<%= entry.name %>">
-                            <input type="hidden" name="id_name" value="<%= entry._id %>">
-                            <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <% }) %>
-        <% } %>
+    </div>
+    
+    
+    
 </div>
 </div>    
