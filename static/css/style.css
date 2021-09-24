@@ -13,6 +13,7 @@ body{
     margin-left: 10%; 
 }
 
+
 .nav-item{
     margin-top: 2% !important;
     margin-left: 10%;
@@ -106,29 +107,54 @@ input{
 
 
 .finance-req{
+    margin-top: 3%;
     padding: 30px;
     background-color: #9ce4cebb !important;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .resource-req{
     padding: 30px;
     background-color: #f3eb7db7 !important;
     margin-top: 5% !important;
-    border-radius: 20px;
+    border-radius: 15px;
     
 }
 
 
+.org-panel a{
+    margin-left: 10px;
+}
+
+.org-details{
+    border-top: 3px solid #56B4D3;
+    border-bottom: 3px solid #56B4D3;
+    padding: 20px;
+    margin-top: 2%;
+    width: 50% ;
+    margin-left: 2%;
+}
 
 .main-btn{
 font-weight: bold;
-margin-left: 30%;
-width: 30%;
+margin:auto;
+display:block;
+width: 50%;
 margin-top: 5% !important;
 background-color: #56B4D3;
 color: white;
 letter-spacing: 2px;
+}
+
+.verify-form{
+    border-top: 3px solid #56B4D3;
+    padding: 20px;
+    margin-top: 3%;
+    box-shadow: 0px 30px 20px -30px rgba(0, 0, 0, 0.5);
+}
+
+.verify-note p{
+    padding: 30px;
 }
 
 .home-btn{
@@ -162,6 +188,7 @@ letter-spacing: 2px;
     border: none;
     padding: 5px;
     width: 50%;
+
 }
 
 .btn-contribute{

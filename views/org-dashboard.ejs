@@ -2,83 +2,97 @@
 <div class= "content">
 
     <div class="row">
-        <div class="col-10"><h2><b>Organization Dashboard</b></h2></div>
-        <div class="col-2"><a href="/org/login" class="btn btn-secondary">Logout</a></div>
+        <div class="col-10"><h1><b>Organization Dashboard</b></h1></div>
+        <div class="col-2"><a href="/org/login" class="btn btn-light">Logout</a></div>
     </div>
 
-    <p class="lead mb-3">Welcome <%= name %> !</p>
-    <a href="/org/dashboard/create-funding-request" class="btn btn-secondary user-login-main">Create Financial Request</a>
-    <a href="/org/dashboard/create-resource-request" class="btn btn-secondary user-login-main">Create Resource Request</a>
-    <a href="/org/dashboard/verify" class="btn btn-secondary user-login-main">Verification Application</a>
-    <a href="/org/dashboard/applications" class="btn btn-secondary user-login-main">View Applications</a>
+    <div class="row">
+        <div class="col org-panel">
+            <a href="/org/dashboard/create-funding-request" class="btn  btn-primary">Create Financial Request</a>
+            <a href="/org/dashboard/create-resource-request" class="btn btn-secondary ">Create Resource Request</a>
+            <a href="/org/dashboard/verify" class="btn btn-success ">Verification Application</a>
+            <a href="/org/dashboard/applications" class="btn btn-info ">View Applications</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6 org-details">
+            <h4 style="color:rgb(6, 44, 126);"><b>Verification Details</b></h4> 
+            <b>Name</b> : <%= orgInfo[0].name %><br>
+            <b>Representative :</b> <%= orgInfo[0].representative %> <br>
+            <b>Primary Contact :</b>  <%= orgInfo[0].contact1 %> <br>
+            <b>Secondary Contact : </b><%= orgInfo[0].contact2 %> <br>
+            <b>Location :</b> <%= orgInfo[0].location %> <br>
+            <b>Verification Status : </b><%= orgInfo[0].status %>  <br>
+        </div>
+    </div>
+
+    
+    
 
     <div class="row">
         <div class="col">
-            <h2>Organization Details</h2>
-            Name : <%= orgInfo[0].name %>
-            Representative : <%= orgInfo[0].representative %> <br>
-            Primary Contact :  <%= orgInfo[0].contact1 %> <br>
-            Secondary Contact : <%= orgInfo[0].contact2 %> <br>
-            Location : <%= orgInfo[0].location %> <br>
-            Verification Status : <%= orgInfo[0].status %>  <br>
+            <div class="finance-req">
+                <h3><b>Financial Requests</b></h3>
+                    <div class="submitted-requests">
+                        <% if(details!=null) { %>
+                        <% details.forEach(function(item){ %>
+                            <div class="request-class card">
+                                <div class="row">
+                                <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+                                <div class="col-6"><h5><%= item.name%></h5></div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-10 request-content">
+                                        <%= item.desc %>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        Progress :  <%= item.current %> /  <%= item.total %> raised!
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                        <% } %>
+                    </div>
+            </div>
+            
+            <div class="resource-req">
+                <h3><b>Resource Requests</b></h3>
+                <div class="submitted-requests">
+                    <% if(resourceDetails!=null) { %>
+                    <% resourceDetails.forEach(function(entry){ %>
+                        <div class="request-class card">
+                            <div class="row">
+                            <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
+                            <div class="col-6"><h5><%= entry.name%></h5></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-10 request-content">
+                                    <%= entry.desc %>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h4>Specifications</h4>
+                                    <b>Brand : </b> <%= entry.brand%> <br>
+                                    <b>Model : </b> <%= entry.model%>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                    <% } %>
+                </div>
+
+            </div>
         </div>
     </div>
-    <h3>Financial Requests</h3>
-    <div class="submitted-requests">
-        <% if(details!=null) { %>
-        <% details.forEach(function(item){ %>
-            <div class="request-class card">
-                <div class="row">
-                <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
-                <div class="col-6"><h5><%= item.name%></h5></div>
-
-                </div>
-                <div class="row">
-                    <div class="col-10 request-content">
-                        <%= item.desc %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Progress :  <%= item.current %> /  <%= item.total %> raised!
-                    </div>
-                </div>
-            </div>
-        <% }) %>
-        <% } %>
-    </div>
-    
-    <h3>Resource Requests</h3>
-    <div class="submitted-requests">
-        <% if(resourceDetails!=null) { %>
-        <% resourceDetails.forEach(function(entry){ %>
-            <div class="request-class card">
-                <div class="row">
-                <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
-                <div class="col-6"><h5><%= entry.name%></h5></div>
-                </div>
-                <div class="row">
-                    <div class="col-10 request-content">
-                        <%= entry.desc %>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h4>Specifications</h4>
-                        <b>Brand : </b> <%= entry.brand%> <br>
-                        <b>Model : </b> <%= entry.model%>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
-                    </div>
-                </div>
-            </div>
-        <% }) %>
-        <% } %>
-    </div>
-
-
 </div>
 

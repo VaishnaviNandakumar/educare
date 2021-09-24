@@ -3,31 +3,34 @@
 
     <div class="row">
         <div class="col-10"><h2><b>Admin Dashboard</b></h2></div>
-        <div class="col-2"><a href="/admin/login" class="btn btn-secondary">Logout</a></div>
+        <div class="col-2"><a href="/admin/login" class="btn btn-light">Logout</a></div>
     </div>
     <div class="row">
-        <h3>Organizations for Approval</h3>
+        <div class="col">
+        <h3>Pending Organizations for Approval</h3>
         <% if(orgDetails!=null) { %>
         <% orgDetails.forEach(function(item){ %>
             <% if(item.status=="PENDING"){ %>  
             <div class="request-class card">
                 <div class="row">
-                Name : <%= item.name%> <br>
-                Representative : <%= item.representative%> <br>
-                Primary Contact : <%= item.contact1%> <br>
-                Secondary Contact : <%= item.contact2%> <br>
-                </div>
-                <div class="row">
-                    <form method="POST" action="/admin/dashboard">
-                        <input type="hidden" name="org" value="<%= item.name %>">
+                    <div class="col">
+                        <b>Name : </b><%= item.name%> <br>
+                        <b>Representative : </b><%= item.representative%> <br>
+                        <b>Primary Contact :</b> <%= item.contact1%> <br>
+                        <b>Secondary Contact : </b><%= item.contact2%> <br>
+                        
+                        <form method="POST" action="/admin/dashboard">
+                            <input type="hidden" name="org" value="<%= item.name %>">
                             <button class="btn btn-success" name="status" type="submit" value="APPROVED">Approve</button>
                             <button class="btn btn-danger" name="status" type="submit" value="REJECTED">Reject</button>
-                    </form>
+                        </form>
+                    </div>
                 </div>
              </div>    
         <% } %> 
         <% }) %>
         <% } %>
+        </div>
     </div>
  </div>
 

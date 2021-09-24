@@ -4,17 +4,29 @@
         <h2>Organization Verification Application</h2>
         <h4>Current Status : <b><%= details[0].status %> </b></h4>
     </div>
+
+    <div class="row"></div>
+   
     <div class="row">
-        
-        <form action="/org/dashboard/verify" method="POST" enctype="multipart/form-data">
-            Please enter the relevant information below.
-            <div class="form-group" ><input type="rep" id="rep" name="rep" class="form-control" placeholder="Enter Contact Representative"/></div>
-            <div class="form-group" ><input type="contact1" id="contact1" name="contact1" class="form-control" placeholder="Enter Primary Contact Number"/></div>
-            <div class="form-group" ><input type="contact2" id="contact2" name="contact2" class="form-control" placeholder="Enter Secondary Contact Number"/></div>
-            <div class="form-group" ><input type="hidden" name="org_name" value="<%= name %>"></div>
-            <button type="submit" class="btn btn-block main-btn">
-            Submit Application
-            </button>
-         </form>
+        <div class="col-6 ">
+            <b style="color:rgb(6, 44, 126);">Please enter the relevant information below. </b>
+            <div class="verify-form">
+            <form action="/org/dashboard/verify" method="POST" enctype="multipart/form-data">
+                <div class="form-group" ><input type="rep" id="rep" name="rep" class="form-control" placeholder="Enter Contact Representative"/></div>
+                <div class="form-group" ><input type="contact1" id="contact1" name="contact1" class="form-control" placeholder="Enter Primary Contact Number"/></div>
+                <div class="form-group" ><input type="contact2" id="contact2" name="contact2" class="form-control" placeholder="Enter Secondary Contact Number"/></div>
+                <div class="form-group" ><input type="hidden" name="org_name" value="<%= name %>"></div>
+                <button type="submit" class="btn btn-block main-btn">
+                Submit Application
+                </button>
+            </form>
+            </div>
+        </div> 
+
+        <div class="col-6 verify-note">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        </p>
+        </div>
     </div>
 </div>
