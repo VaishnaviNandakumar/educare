@@ -34,15 +34,20 @@ body{
 }
 
 .main-login{
-    padding: 20px;
+    padding: 30px;
     margin-left: 15%;
-    margin-top: 10%;
-    height: 90% !important;
+    margin-top: 2%;
+    height: 100% !important;
     box-shadow: 0px 30px 20px -30px rgba(0, 0, 0, 0.5);
 }
 
+.main-login img{
+    padding: 10px;
+}
+
+
 .intro{
-    margin-top: 20%;
+    margin-top: 10%;
     color: #323333;
 }
 .intro p{
@@ -139,7 +144,7 @@ input{
 font-weight: bold;
 margin:auto;
 display:block;
-width: 50%;
+width: 100%;
 margin-top: 5% !important;
 background-color: #56B4D3;
 color: white;
@@ -168,15 +173,18 @@ letter-spacing: 2px;
 
 
 .user-login-main{
+    width: 100% !important;
     background-color: #43c9b2;
 }
 
 .org-login-main{
-    background-color: #acb4b8;
+    width: 100% !important;
+    background-color: #b4dd7f;
 }
 
 .admin-login-main{
-    background-color: #64c9d6;
+    width: 100% !important;
+    background-color: #c6e5e9;
 }
 
 
