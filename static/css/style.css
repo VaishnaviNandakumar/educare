@@ -8,6 +8,10 @@ body{
     margin-top: 1% !important;
 }
 
+p {
+    text-align: justify !important;
+}
+
 .navbar{
     background-color: #56b4d300 !important;
     margin-left: 10%; 
@@ -71,7 +75,6 @@ input{
 .content{
     background-color: white;
     padding: 50px;
-    
     border-radius: 30px;
 }
 
@@ -114,15 +117,15 @@ input{
 .finance-req{
     margin-top: 3%;
     padding: 30px;
-    background-color: #9ce4cebb !important;
-    border-radius: 15px;
+    background-color: #90ddc6bb !important;
+    border-radius: 5px;
 }
 
 .resource-req{
     padding: 30px;
-    background-color: #f3eb7db7 !important;
+    background-color: #7df387b7 !important;
     margin-top: 5% !important;
-    border-radius: 15px;
+    border-radius: 5px;
     
 }
 
