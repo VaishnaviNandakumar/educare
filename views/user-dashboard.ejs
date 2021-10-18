@@ -10,7 +10,8 @@
         <div class="col-9"><h4>Welcome <%= name %> !</h4> <br></div>
         <div class="col-3"><a href="/user/dashboard/view-applications" class="btn btn-info">View Application Status</a></div>
     </div>
-    
+
+
     <div class="row">
         <div class="col">
             <h3 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h3><br>
@@ -21,23 +22,30 @@
                     <div class="request-class card">
                         <div class="row">
                         <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
-                        <div class="col-6"><h5><%= item.name%></h5></div>
+                        <div class="col-4"><h5><%= item.name%></h5></div>
+                        <div class="col-2"><button onclick='translateWord("<%= item.desc %>", "<%= item._id %>")' class="btn-translate">Translate</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col request-content">
+                                <%= item.desc %>
+                            </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-10 request-content">
-                                <%= item.desc %>
+                            <div class="col">
+                                <div id="<%= item._id %>" class="translateBody"></div>
+                            </div>   
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h5><br>Progress :  <%= item.current %> /  <%= item.total %> raised!</h5>
                             </div>
-                            <div class="col-2">
+                            <div class="col-4">
                                 <form method="POST" action="/user/dashboard/fund-contribution">
                                     <input type="hidden" name="id_name" value="<%= item._id %>">
                                     <button class="btn btn-contribute" type="submit" value="Contribute">Contribute</button>
                                 </form>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                Progress :  <%= item.current %> /  <%= item.total %> raised!
                             </div>
                         </div>
                     </div>
@@ -52,12 +60,18 @@
                 <div class="request-class card">
                     <div class="row">
                     <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
-                    <div class="col-6"><h5><%= entry.name%></h5></div>
+                    <div class="col-4"><h5><%= entry.name%></h5></div>
+                    <div class="col-2"><button onclick='translateWord("<%= entry.desc %>", "<%= entry._id %>")' class="btn-translate">Translate</button></div>
                     </div>
                     <div class="row">
-                        <div class="col-10 request-content">
+                        <div class="col request-content">
                             <%= entry.desc %>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="<%= entry._id %>" class="translateBody"></div>
+                        </div>   
                     </div>
                     <div class="row">
                         <div class="col">
@@ -67,14 +81,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-10">
-                            Progress :  <%= entry.current %> /  <%= entry.qty %> collected!
+                        <div class="col-8">
+                           <h5> <br>Progress :  <%= entry.current %> /  <%= entry.qty %> collected!</h5>
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
                             <form method="POST" action="/user/dashboard/resource-contribution">
                                 <input type="hidden" name="org_name" value="<%= entry.name %>">
                                 <input type="hidden" name="id_name" value="<%= entry._id %>">
-                                <button class="btn-contribute" type="submit" value="Contribute">Contribute</button>
+                                <button class="btn btn-contribute" type="submit" value="Contribute">Contribute</button>
                             </form>
                         </div>
                     </div>
@@ -89,3 +103,35 @@
     
 </div>
 </div>    
+
+<script>
+    function translateWord(word, id) {
+    var url = 'http://localhost:8000';
+    var endpoint = '/user/dashboard/translate';
+    var toLang = "en-ml";
+
+    //var fromLang = document.getElementById("fromLang").value;
+    //var toLang = document.getElementById("toLang").value;
+    //var word = document.getElementById("wordInput").value;
+
+    var payload = {"word": word, "to": toLang};
+    //console.log(payload);
+
+    var http = new XMLHttpRequest();
+
+    http.open("POST", url+endpoint, true);
+    http.setRequestHeader("Content-type", "application/json");
+
+    http.onreadystatechange = function() {
+        var DONE = 4;       // 4 means the request is done.
+        var OK = 200;       // 200 means a successful return.
+        if (http.readyState == DONE && http.status == OK && http.responseText) {
+            var reply = http.responseText;
+            document.getElementById(id).innerHTML = reply;
+        }
+    };
+    var params = JSON.stringify(payload);
+    http.send(params);
+
+}
+</script>

@@ -17,6 +17,10 @@ p {
     margin-left: 10%; 
 }
 
+.translateBody{
+    text-align: justify;
+    padding-bottom: 20px;
+}
 
 .nav-item{
     margin-top: 2% !important;
@@ -203,10 +207,18 @@ letter-spacing: 2px;
 }
 
 .btn-contribute{
-    margin-left: 5% !important;
     font-weight: bold;
     background-color: rgba(55, 238, 131, 0.747);
     border: none;
     padding: 5px;
     width: 85%;
+}
+
+.btn-translate{
+    border-bottom: 1px solid black !important;
+    background-color: white;
+    padding: 5px;
+    width: 100%;
+    color:rgb(6, 44, 126);
+    font-size: 20px;
 }

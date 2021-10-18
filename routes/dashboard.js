@@ -4,11 +4,25 @@ const { ensureAuthenticated } = require("../config/auth");
 var fs = require("fs");
 var path = require("path");
 const upload = require("../multer-storage/multer");
+var bodyParser = require("body-parser"); 
+var jsonParser = bodyParser.json(); 
 
 
 const Requests = require("../models/Requests");
 const Resource = require("../models/Resource");
 const Submissions = require("../models/Submissions");
+
+const LanguageTranslatorV3 = require("ibm-watson/language-translator/v3");
+const { IamAuthenticator } = require("ibm-watson/auth");
+
+const languageTranslator = new LanguageTranslatorV3({
+  version: "2018-05-01",
+  authenticator: new IamAuthenticator({
+    apikey: "WnvH9w8cDcGJGLwFOhS_gJM2fmaNb50bQf9esQ9wYRWV",
+  }),
+  serviceUrl: "https://api.au-syd.language-translator.watson.cloud.ibm.com",
+});
+
 
 router.get("/", ensureAuthenticated, function (req, res) {
   Requests.find({}, function (err, allDetails) {
@@ -28,6 +42,23 @@ router.get("/", ensureAuthenticated, function (req, res) {
       });
     }
   });
+});
+
+router.post("/translate", jsonParser, function (req, res) {
+  const translateParams = {
+  text: req.body.word,
+  modelId: req.body.to,
+  };
+  console.log("Text Params", translateParams)
+
+  languageTranslator
+    .translate(translateParams)
+    .then(function (translationResult, reject) {
+      res.send(JSON.stringify(translationResult["result"]["translations"][0]["translation"], null, 2));
+    })
+    .catch((err) => {
+      console.log("Error:", err);
+    });
 });
 
 router.post("/", function (req, res) {
