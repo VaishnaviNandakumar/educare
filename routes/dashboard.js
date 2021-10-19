@@ -33,10 +33,22 @@ router.get("/", ensureAuthenticated, function (req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.render("user-dashboard", {
-            details: allDetails,
-            resourceDetails: resourceInfo,
-            name: req.user.name,
+          languageTranslator.listLanguages().then((languages) => {
+            var arr = [];
+            for (var key in languages["result"]["languages"]) {
+              var value =
+                languages["result"]["languages"][key]["language_name"] +
+                ":" +
+                languages["result"]["languages"][key]["language"];
+              arr.push(value);
+            }
+            //console.log(arr);
+            res.render("user-dashboard", {
+              details: allDetails,
+              resourceDetails: resourceInfo,
+              name: req.user.name,
+              languages: arr,
+            });
           });
         }
       });

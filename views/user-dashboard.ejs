@@ -11,6 +11,15 @@
         <div class="col-3"><a href="/user/dashboard/view-applications" class="btn btn-info">View Application Status</a></div>
     </div>
 
+    <div class="row">
+        <div class="col">
+        <select id="languages">
+            <%for(i=0; i<languages.length; i++){%>
+                <option value="<%= languages[i] %>"><%= languages[i] %></option>
+            <%}%>
+        </select>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col">
@@ -21,10 +30,11 @@
                 <% details.forEach(function(item){ %>
                     <div class="request-class card">
                         <div class="row">
-                        <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
-                        <div class="col-4"><h5><%= item.name%></h5></div>
-                        <div class="col-2"><button onclick='translateWord("<%= item.desc %>", "<%= item._id %>")' class="btn-translate">Translate</button></div>
+                            <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
+                            <div class="col-4"><h5><%= item.name%></h5></div>
+                            <div class="col-2"><button onclick='translateWord("<%= item.desc %>", "<%= item._id %>")' class="btn-translate">Translate</button></div>
                         </div>
+
                         <div class="row">
                             <div class="col request-content">
                                 <%= item.desc %>
@@ -59,10 +69,11 @@
                 <% resourceDetails.forEach(function(entry){ %>
                 <div class="request-class card">
                     <div class="row">
-                    <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
-                    <div class="col-4"><h5><%= entry.name%></h5></div>
-                    <div class="col-2"><button onclick='translateWord("<%= entry.desc %>", "<%= entry._id %>")' class="btn-translate">Translate</button></div>
+                        <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
+                        <div class="col-4"><h5><%= entry.name%></h5></div>
+                        <div class="col-2"><button onclick='translateWord("<%= entry.desc %>", "<%= entry._id %>")' class="btn-translate">Translate</button></div>
                     </div>
+
                     <div class="row">
                         <div class="col request-content">
                             <%= entry.desc %>
@@ -108,15 +119,10 @@
     function translateWord(word, id) {
     var url = 'http://localhost:8000';
     var endpoint = '/user/dashboard/translate';
-    var toLang = "en-ml";
-
-    //var fromLang = document.getElementById("fromLang").value;
-    //var toLang = document.getElementById("toLang").value;
-    //var word = document.getElementById("wordInput").value;
+    var lang = document.getElementById('languages').selectedOptions[0].value;
+    var toLang = "en-"+lang.split(":")[1];
 
     var payload = {"word": word, "to": toLang};
-    //console.log(payload);
-
     var http = new XMLHttpRequest();
 
     http.open("POST", url+endpoint, true);

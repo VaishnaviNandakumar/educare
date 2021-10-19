@@ -13,7 +13,7 @@ const languageTranslator = new LanguageTranslatorV3({
 
 const translateParams = {
   text: "Hello, how are you today?",
-  modelId: "en-ml",
+  modelId: "en-ru",
 };
 
 languageTranslator
@@ -28,3 +28,21 @@ languageTranslator
   .catch((err) => {
     console.log("error:", err);
   });
+
+languageTranslator
+    .listLanguages()
+  .then((languages) => {
+      var arr = []
+      for (var key in languages["result"]["languages"]) {
+        var value =
+          languages["result"]["languages"][key]["language_name"] +
+          ":" +
+          languages["result"]["languages"][key]["language"];
+        arr.push(value);
+      }
+      //console.log(arr);
+    })
+    .catch((err) => {
+      console.log("error:", err);
+    });
+
