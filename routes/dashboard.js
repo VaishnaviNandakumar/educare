@@ -15,6 +15,8 @@ const Submissions = require("../models/Submissions");
 const LanguageTranslatorV3 = require("ibm-watson/language-translator/v3");
 const { IamAuthenticator } = require("ibm-watson/auth");
 
+/*
+Old API Key
 const languageTranslator = new LanguageTranslatorV3({
   version: "2018-05-01",
   authenticator: new IamAuthenticator({
@@ -23,6 +25,17 @@ const languageTranslator = new LanguageTranslatorV3({
   serviceUrl: "https://api.au-syd.language-translator.watson.cloud.ibm.com",
 });
 
+*/
+
+
+const languageTranslator = new LanguageTranslatorV3({
+  version: "2018-05-01",
+  authenticator: new IamAuthenticator({
+    apikey: "b7UpIyy43t1g2QW9DSkC0-eSaG1D-OSUqBIoESQ0VYrf",
+  }),
+  serviceUrl:
+    "https://api.eu-gb.language-translator.watson.cloud.ibm.com",
+});
 
 router.get("/", ensureAuthenticated, function (req, res) {
   Requests.find({}, function (err, allDetails) {
