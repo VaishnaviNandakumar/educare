@@ -12,15 +12,16 @@
     </div>
 
     <div class="row">
-        <div class="col">
-        <select id="languages">
-            <%for(i=0; i<languages.length; i++){%>
-                <option value="<%= languages[i] %>"><%= languages[i] %></option>
-            <%}%>
-        </select>
+        <div class="col-4"><h5>Select a language for translation : </h5></div>
+        <div class="col-3">
+            <select id="languages">
+                <%for(i=0; i<languages.length; i++){%>
+                    <option value="<%= languages[i] %>"><%= languages[i] %></option>
+                <%}%>
+            </select>
         </div>
     </div>
-
+    <div class="row"></div>
     <div class="row">
         <div class="col">
             <h3 style="color:rgb(6, 44, 126);"><b>Recent Updates</b></h3><br>
