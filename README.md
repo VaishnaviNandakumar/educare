@@ -42,7 +42,7 @@ Displays all the financial and resource requests from approved organizations. A 
 ![User-Dashboard](https://github.com/VaishnaviNandakumar/ibm-hack/blob/main/docs/User-Dashboard.png)
 
 * <i>Contribute Funds </i><br>
-Used to extend financial help for a cause.
+Used to extend financial help for a cause. <br>
 ![Funds](https://github.com/VaishnaviNandakumar/ibm-hack/blob/main/docs/Resource-Contribution.PNG)
 
 * <i>Contribute Resources </i><br>
