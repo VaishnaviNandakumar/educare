@@ -1,6 +1,16 @@
-# ibm-hack
+## EduCare - An Educational Resource Based Contribution Platform
 
-IBM Module
-Language Translator
-App ID
-Delivery
+### Overview
+
+### Database System
+
+### Roles and Functionalities
+
+#### Admin
+
+#### Organization
+
+#### User
+
+
+
