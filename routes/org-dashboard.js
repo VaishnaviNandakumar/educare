@@ -44,42 +44,48 @@ router.get("/create-resource-request", ensureAuthenticated, (req, res) =>
 );
 
 router.post("/create-funding-request", ensureAuthenticated, (req, res) => {
-    const { title, desc, total } = req.body;
-        var name = req.user.name;
-        var current = 0;
-        const post = new Requests({
-            name,
-            title,
-            desc,
-            total,
-            current
-        });
-        //Save user
-        post.save()
-        .then((user) => {
-        res.redirect("/org/dashboard");
-        })
+  const { title, desc, total } = req.body;
+  var name = req.user.name;
+  var current = 0;
+  Organization.find({ name: req.user.name }, function (err, orgInfo) {
+    var status = orgInfo[0].status;
+      const post = new Requests({
+        name,
+        title,
+        desc,
+        total,
+        current,
+        status
+      });
+      //Save user
+      post.save()
+      .then((user) => {
+      res.redirect("/org/dashboard");
+      })
+    })
 });
 
 
 router.post("/create-resource-request", ensureAuthenticated, (req, res) => {
   const { title, desc, qty, brand, model } = req.body;
-      var name = req.user.name;
-      var status = "PENDING";
-      var current = 0;
-      const post = new Resource({
-        name,
-        title,
-        desc,
-        qty,
-        current,
-        brand,
-        model,
-        status
-      });
-      //Save user
-      post.save().then((user) => {
-        res.redirect("/org/dashboard");
+  var name = req.user.name;
+  var current = 0;
+  Organization.find({ name: req.user.name }, function (err, orgInfo) {
+        var status = orgInfo[0].status;
+        const post = new Resource({
+          name,
+          title,
+          desc,
+          qty,
+          current,
+          brand,
+          model,
+          status,
+        });
+        //Save user
+        post.save().then((user) => {
+          res.redirect("/org/dashboard");
+        });
       });
 });
 

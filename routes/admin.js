@@ -5,8 +5,8 @@ const { ensureAuthenticated } = require("../config/auth");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-const requestModel = require("../models/Requests");
-const resourceModel = require("../models/Resource");
+const Requests = require("../models/Requests");
+const Resources = require("../models/Resource");
 const Organization = require("../models/Organization");
 const User = require("../models/User");
 const Submissions = require("../models/Submissions");
@@ -106,19 +106,42 @@ router.get("/dashboard", function (req, res) {
 });
 
 
+
 router.post("/dashboard", function (req, res) {
-    Organization.updateOne(
-      { name: req.body.org },
-      { $set: { status: req.body.status } },
-      function (err, allDetails) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/admin/dashboard");
-        }
+  Organization.updateOne(
+    { name: req.body.org },
+    { $set: { status: req.body.status } },
+    function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+          Requests.updateMany(
+            { name: req.body.org },
+            { $set: { status: req.body.status } },
+            function (err) {
+              if (err) {
+                console.log(err);
+              } else {
+                  Resources.updateMany(
+                    { name: req.body.org },
+                    { $set: { status: req.body.status } },
+                    function (err) {
+                      if (err) {
+                        console.log(err);
+                      } else {
+                        res.redirect("/admin/dashboard");
+                      }
+                    }
+                  );
+              }
+            }
+          );
       }
-    );
+    }
+  );
 });
+
+
 
 
 module.exports = router;

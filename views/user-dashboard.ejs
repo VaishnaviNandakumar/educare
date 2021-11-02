@@ -29,6 +29,7 @@
                 <h3><b>Financial Requests</b></h3>
                 <% if(details!=null) { %>
                 <% details.forEach(function(item){ %>
+                    <% if(item.status=="APPROVED"){ %>
                     <div class="request-class card">
                         <div class="row">
                             <div class="col-6"><h4><b><%= item.title%></b></h4></div> 
@@ -59,15 +60,18 @@
                             </div>
                             </div>
                         </div>
-                    </div>
+                    
+                <% } %>
                 <% }) %>
                 <% } %>
+                </div>
             </div>
             
             <div class="resource-req">
                 <h3><b>Resource Requests</b></h3>
                 <% if(resourceDetails!=null) { %>
                 <% resourceDetails.forEach(function(entry){ %>
+                <% if(entry.status=="APPROVED"){ %>    
                 <div class="request-class card">
                     <div class="row">
                         <div class="col-6"><h4><b><%= entry.title%></b></h4></div> 
@@ -105,6 +109,7 @@
                         </div>
                     </div>
                 </div>
+                <% } %>                
                 <% }) %>
                 <% } %>
             </div>

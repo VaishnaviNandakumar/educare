@@ -26,7 +26,11 @@ var userSchema = new mongoose.Schema({
     type: Number,
     required: true,
     index: true,
-  }
+  },
+  status: {
+    type: String,
+    index: true,
+  },
 });
 // Export the model
 module.exports = mongoose.model("Requests", userSchema);
