@@ -1,10 +1,23 @@
 ## EduCare - An Educational Resource Based Contribution Platform
+Submission for IBM Hack 2021
 
 ### Overview
+The current shift of digitizing education has become very challenging for students who can not afford the requirements necessary for its implementation. From costly resources such as laptops and other gadgets to basic necessities such as a stable internet connection, there is a growing need for a reliable platform to ensure equal access to education in an increasingly digital world. The solution for this problem statement is to implement a resource based contributing platform that can utilized by the required parties to obtain financial support and acquire resources like laptops and other gadgets for students who can’t afford it.
 
 ### Setup
 
-### Database System
+1. Clone the repostiory
+2. Install dependencies
+```
+npm install
+```
+3. Set variables for the keys\connections used in the `.env` file
+```
+```
+4. Start the application
+```
+node app.js
+```
 
 ### Roles and Functionalities
 
