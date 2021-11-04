@@ -28,6 +28,7 @@ Used to create a resource request with specifications based on the type, models 
 
 * <i>Verification Application</i><br>
 Sumbits an application consisting of the organization representative and contact details for approval by the administrator.
+
 ![Org-Verification](https://github.com/VaishnaviNandakumar/ibm-hack/blob/main/docs/Org-Verification.PNG)
 
 * <i>View Applications</i><br>
