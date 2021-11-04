@@ -13,6 +13,14 @@ npm install
 ```
 3. Set variables for the keys\connections used in the `.env` file
 ```
+LANGUAGE_TRANSLATOR_VERSION=""
+LANGUAGE_TRANSLATOR_APIKEY=""
+LANGUAGE_TRANSLATOR_SERVICE_URL=""
+WATSON_VERSION=""
+WATSON_APIKEY=""
+WATSON_URL=""
+WATSON_ID=""
+MONGODB_CLUSTER_URI=""
 ```
 4. Start the application
 ```
