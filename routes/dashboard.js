@@ -19,12 +19,11 @@ const { IamAuthenticator } = require("ibm-watson/auth");
 
 
 const languageTranslator = new LanguageTranslatorV3({
-  version: "2018-05-01",
+  version: process.env.LANGUAGE_TRANSLATOR_VERSION,
   authenticator: new IamAuthenticator({
-    apikey: "b7UpIyy43t1g2QW9DSkC0-eSaG1D-OSUqBIoESQ0VYrf",
+    apikey: process.env.LANGUAGE_TRANSLATOR_APIKEY,
   }),
-  serviceUrl:
-    "https://api.eu-gb.language-translator.watson.cloud.ibm.com",
+  serviceUrl: process.env.LANGUAGE_TRANSLATOR_SERVICE_URL,
 });
 
 router.get("/", ensureAuthenticated, function (req, res) {

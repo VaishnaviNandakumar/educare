@@ -9,11 +9,11 @@ var request1 = require("request");
 const AssistantV2 = require("ibm-watson/assistant/v2");
 const { IamAuthenticator } = require("ibm-watson/auth");
 const assistant = new AssistantV2({
-  version: "2019-02-26",
+  version: process.env.WATSON_VERSION,
   authenticator: new IamAuthenticator({
-    apikey: "svgRv9Vv0C8ymjkcUSzEZL98yxAPT2xpe1oCcJQVvuqE",
+    apikey: process.env.WATSON_APIKEY,
   }),
-  serviceUrl: "https://api.eu-gb.assistant.watson.cloud.ibm.com",
+  serviceUrl: process.env.WATSON_URL,
 });
 
 
@@ -40,9 +40,8 @@ router.post("/contact", async (req, res) => {
         }
         else {
             var sessionID = body;
-            //console.log("Session ID : ", body);
             payload = {
-                assistantId: "1cb263d0-410d-44fb-bfbf-3a20d8d9c86c",
+                assistantId: process.env.WATSON_ID,
                 sessionId: sessionID,
                 input: {
                 message_type: "text",

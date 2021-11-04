@@ -5,7 +5,7 @@ const flash = require("connect-flash");
 const express = require('express');
 const session = require("express-session");
 const expressLayouts = require('express-ejs-layouts');
-
+require("dotenv").config();
 
 const app = express();
 
