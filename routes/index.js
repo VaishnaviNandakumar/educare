@@ -34,8 +34,9 @@ router.get('/session', async (req, res) => {
 })
 
 router.post("/contact", async (req, res) => {
+    var url =  process.env.SERVER + "/session"
     request1(
-      "https://educare-node-app.herokuapp.com/session",
+      url,
       async (error, response, body) => {
         if (error) {
           res.send("An erorr occured");

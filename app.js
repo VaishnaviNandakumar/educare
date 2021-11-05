@@ -77,5 +77,5 @@ app.use('/static', express.static('static'))
 
 
 
-const PORT =process.env.PORT|| 8001;
+const PORT = process.env.PORT|| 8000;
 app.listen(PORT,console.log(`Server started on port ${PORT}`));
