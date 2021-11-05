@@ -123,7 +123,7 @@
 
 <script>
     function translateWord(word, id) {
-    var url = 'https://educare-node-app.herokuapp.com/';
+    var url = "https://educare-node-app.herokuapp.com";
     var endpoint = '/user/dashboard/translate';
     var lang = document.getElementById('languages').selectedOptions[0].value;
     var toLang = "en-"+lang.split(":")[1];
