@@ -24,7 +24,7 @@ router.get("/contact", (req, res) => res.render("contact", { answer: "" }));
 router.get('/session', async (req, res) => {
     try {
         const session = await assistant.createSession({
-        assistantId: "1cb263d0-410d-44fb-bfbf-3a20d8d9c86c",
+          assistantId: process.env.WATSON_ID,
         });
         res.send(session["result"]["session_id"]);
     }
@@ -34,30 +34,32 @@ router.get('/session', async (req, res) => {
 })
 
 router.post("/contact", async (req, res) => {
-    request1('http://localhost:8001/session', async (error, response, body) => {
+    request1(
+      "https://educare-node-app.herokuapp.com/session",
+      async (error, response, body) => {
         if (error) {
-            res.send('An erorr occured')
+          res.send("An erorr occured");
+        } else {
+          var sessionID = body;
+          payload = {
+            assistantId: process.env.WATSON_ID,
+            sessionId: sessionID,
+            input: {
+              message_type: "text",
+              text: req.body.question,
+            },
+          };
+          try {
+            const message = await assistant.message(payload);
+            var text = message["result"]["output"]["generic"][0]["text"];
+            //console.log("Message: ", text);
+            res.render("contact", { answer: text });
+          } catch (e) {
+            console.log("Error with message : " + e);
+          }
         }
-        else {
-            var sessionID = body;
-            payload = {
-                assistantId: process.env.WATSON_ID,
-                sessionId: sessionID,
-                input: {
-                message_type: "text",
-                text: req.body.question,
-                },
-            };
-            try {
-                const message = await assistant.message(payload);
-                var text = message["result"]["output"]["generic"][0]["text"];
-                //console.log("Message: ", text);
-                res.render('contact', {answer : text});
-            } catch (e) {
-                console.log("Error with message : " + e);
-            }
-        }
-    })
+      }
+    );
 });
 
 module.exports = router;
