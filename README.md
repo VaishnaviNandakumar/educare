@@ -13,6 +13,7 @@ npm install
 ```
 3. Set variables for the keys\connections used in the `.env` file
 ```
+SERVER="
 LANGUAGE_TRANSLATOR_VERSION=""
 LANGUAGE_TRANSLATOR_APIKEY=""
 LANGUAGE_TRANSLATOR_SERVICE_URL=""
@@ -24,7 +25,7 @@ MONGODB_CLUSTER_URI=""
 ```
 4. Start the application
 ```
-node app.js
+node run start
 ```
 
 ### Roles and Functionalities
