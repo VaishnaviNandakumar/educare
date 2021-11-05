@@ -34,7 +34,7 @@ router.get('/session', async (req, res) => {
 })
 
 router.post("/contact", async (req, res) => {
-    request1('http://localhost:8000/session', async (error, response, body) => {
+    request1('http://localhost:8001/session', async (error, response, body) => {
         if (error) {
             res.send('An erorr occured')
         }
